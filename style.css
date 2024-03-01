@@ -58,9 +58,9 @@ body {
 }
 
 .results{
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content:space-between;
     padding: 1%;
 }
 
@@ -81,6 +81,7 @@ body {
 .results-show{
     display: grid;
     grid-template-columns: auto auto auto;
+    margin-bottom: 3rem;
 }
 
 .results-box{
@@ -88,7 +89,6 @@ body {
     padding: 0.8rem 1.2rem;
     display: flex;
     flex-direction: column;
-    margin-bottom: 1.1rem;
 }
 
 .results-align{
