@@ -1,8 +1,5 @@
 function formatarNumero(valor) {
-    // Arredondar o número para duas casas decimais
     const numeroFormatado = parseFloat(valor).toFixed(2);
-    // Separar o milhar por "."
-    // Substituir o separador decimal por ","
     const partes = numeroFormatado.split('.');
     partes[0] = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     return partes.join(',');
