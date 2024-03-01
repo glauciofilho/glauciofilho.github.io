@@ -22,15 +22,18 @@ body {
 }
 
 .container {
+    margin-top: 3%;
     position: relative;
     width: 80%;
     height: 80%;
     display: flex;
     background-color: #283D52;
     box-shadow: 5px 5px 10px rgba(255, 255, 255, .212);
+    border-radius: 2%;
 }
 
 .form{
+    margin-top: 1%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,6 +76,24 @@ body {
     background-color: #fff;
     margin: 0 auto;
     position:relative;
+}
+
+.results-show{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    right: 0;
+}
+
+.results-box{
+    margin: 0.6rem 0;
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.1rem;
+}
+
+.results-align{
+    text-align: right;
 }
 
 .input-group{
