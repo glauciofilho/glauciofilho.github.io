@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <div class="form">
-            <form action="#">
+            <form id = "form" class="form" action="#">
                 <div class="form-header">
                     <div class="title">
                         <h1>SIMULADOR GRAN</h1>
@@ -47,7 +47,7 @@
                         <h2>TOTAL</h2>
                         <div class="input-box">
                             <label for="fullprice">VALOR</label>
-                            <input id="fullprice" type="number" name="fullprice" value= 300000 required>
+                            <input id="fullprice" type="number" name="fullprice" value= 300000 oninput="formatarMoeda(this)" required>
                         </div>
                         <div class="input-box">
                             <label for="paytime">PERIODO TOTAL (ANOS)</label>
@@ -98,4 +98,6 @@
             </div>
         </div>
     </div>
+    <script src="./script.js"></script>
+</body>
 </html>
