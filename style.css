@@ -22,18 +22,15 @@ body {
 }
 
 .container {
-    margin-top: 3%;
     position: relative;
     width: 80%;
     height: 80%;
     display: flex;
     background-color: #283D52;
     box-shadow: 5px 5px 10px rgba(255, 255, 255, .212);
-    border-radius: 2%;
 }
 
 .form{
-    margin-top: 1%;
     display: flex;
     justify-content: center;
     align-items: center;
