@@ -106,15 +106,15 @@ body {
 
 .input-box input{
     top: 50%;
-    right: 0;
+    margin-left: auto;
     border: none;
     border-radius: 3px;
     background-color: #E0CA96;
     color: #000;
+    text-align: right;
 }
 
 .logo {
-    position: fixed;
+    position: relative;
     bottom: 1%;
-    right: 1%;
 }
