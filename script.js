@@ -124,9 +124,9 @@ function calcularValores() {
         document.getElementById('quantBalao').innerText = paytime;
         document.getElementById('quantParcela').innerText = paytime*12-quantEntrada;
         document.getElementById('porcParcela').innerText = formatarNumero(100-porcEntrada-porcBalao);
-        document.getElementById('quant_Entrada').innerText = "ENTRADA ("+formatarNumero(quantEntrada)+"X)";
-        document.getElementById('quant_Balao').innerText = "BALÃO ("+formatarNumero(quantBalao)+"X)";
-        document.getElementById('quant_Parcela').innerText = "PARCELA ("+formatarNumero(quantParcela)+"X)";
+        document.getElementById('quant_Entrada').innerText = "ENTRADA ("+quantEntrada)+"X)";
+        document.getElementById('quant_Balao').innerText = "BALÃO ("+paytime+"X)";
+        document.getElementById('quant_Parcela').innerText = "PARCELA ("+paytime*12-quantEntrada+"X)";
     }, 500);
 }
 
