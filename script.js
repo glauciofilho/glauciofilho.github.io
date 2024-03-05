@@ -18,7 +18,7 @@ function calcularValores() {
         let porcBalao = parseFloat(document.getElementById('porcBalao').value);
         let porcParcela = parseFloat(document.getElementById('porcParcela').value);
 
-        if (porcBalao == null ) {
+        if (porcBalao = null ) {
             porcBalao = 0;
             document.getElementById('porcBalao').value = porcBalao;
         }
