@@ -10,124 +10,97 @@ function formatarNumero(valor) {
 function calcularValores() {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(function () {
-        let fullprice = parseFloat(document.getElementById('fullprice').value);
-        let paytime = parseInt(document.getElementById('paytime').value);
-        let discont = parseFloat(document.getElementById('discont').value);
+        let valorTotal = parseFloat(document.getElementById('fullprice').value);
+        let periodoPagamento = parseInt(document.getElementById('paytime').value);
+        let desconto = parseFloat(document.getElementById('discont').value);
         let quantEntrada = parseInt(document.getElementById('quantEntrada').value);
-        let porcEntrada = parseFloat(document.getElementById('porcEntrada').value);
-        let porcBalao = parseFloat(document.getElementById('porcBalao').value);
+        let porcentagemEntrada = parseFloat(document.getElementById('porcEntrada').value);
+        let porcentagemBalao = parseFloat(document.getElementById('porcBalao').value);
 
-        if (isNaN(fullprice)) {
-            fullprice = 0;
-            document.getElementById('fullprice').value = fullprice;
+        if (isNaN(valorTotal)) {
+            valorTotal = 0;
+            document.getElementById('fullprice').value = valorTotal;
         }
-        
-        if (isNaN(paytime)) {
-            paytime = 0;
-            document.getElementById('paytime').value = paytime;
+        if (isNaN(periodoPagamento)) {
+            periodoPagamento = 0;
+            document.getElementById('paytime').value = periodoPagamento;
         }
-
-        if (isNaN(discont)) {
-            discont = 0;
-            document.getElementById('discont').value = discont;
+        if (isNaN(desconto)) {
+            desconto = 0;
+            document.getElementById('discont').value = desconto;
         }
-
         if (isNaN(quantEntrada)) {
             quantEntrada = 0;
             document.getElementById('quantEntrada').value = quantEntrada;
         }
-
-        if (isNaN(porcEntrada)) {
-            porcEntrada = 0;
-            document.getElementById('porcEntrada').value = porcEntrada;
+        if (isNaN(porcentagemEntrada)) {
+            porcentagemEntrada = 0;
+            document.getElementById('porcEntrada').value = porcentagemEntrada;
         }
-
-        if (isNaN(porcBalao)) {
-            porcBalao = 0;
-            document.getElementById('porcBalao').value = porcBalao;
+        if (isNaN(porcentagemBalao)) {
+            porcentagemBalao = 0;
+            document.getElementById('porcBalao').value = porcentagemBalao;
         }
-
-        if (isNaN(porcParcela)) {
-            porcParcela = 0;
-            document.getElementById('porcParcela').value = porcParcela;
-        }        
         
-        if (paytime < 1 || paytime > 23) {
-            alert("A quantidade de tempo de pagamento deve ser entre 1 e 23.");
-            paytime = Math.min(Math.max(paytime, 1), 23);
-            document.getElementById('paytime').value = paytime;
+        if (periodoPagamento < 1 || periodoPagamento > 23) {
+            alert("O período de pagamento deve estar entre 1 e 23 anos.");
+            periodoPagamento = Math.min(Math.max(periodoPagamento, 1), 23);
+            document.getElementById('paytime').value = periodoPagamento;
         }
-
-        if (discont < 0 || discont > 100) {
-            alert("Disconto tem que ser entre 0 e 100%.");
-            discont = 0;
-            document.getElementById('discont').value = discont;
+        if (desconto < 0 || desconto > 100) {
+            alert("O desconto deve estar entre 0 e 100%.");
+            desconto = 0;
+            document.getElementById('discont').value = desconto;
         }
-
         if (quantEntrada < 1 || quantEntrada > 4) {
-            alert("A quantidade de entrada deve ser um número entre 1 e 4.");
+            alert("A quantidade de parcelas da entrada deve ser um número entre 1 e 4.");
             quantEntrada = Math.min(Math.max(quantEntrada, 1), 4);
             document.getElementById('quantEntrada').value = quantEntrada;
         }
-
-        if (porcEntrada < 10) {
-            alert("A porcentagem de entrada deve ser no mínimo 10.");
-            porcEntrada = 10;
-            document.getElementById('porcEntrada').value = porcEntrada;
+        if (porcentagemEntrada < 10) {
+            alert("A porcentagem da entrada deve ser no mínimo 10.");
+            porcentagemEntrada = 10;
+            document.getElementById('porcEntrada').value = porcentagemEntrada;
         }
-
-        if (porcEntrada > 100) {
-            alert("A porcentagem de entrada deve ser no máximo 100.");
-            porcEntrada = 10;
-            document.getElementById('porcEntrada').value = porcEntrada;
+        if (porcentagemEntrada > 100) {
+            alert("A porcentagem da entrada deve ser no máximo 100.");
+            porcentagemEntrada = 10;
+            document.getElementById('porcEntrada').value = porcentagemEntrada;
+        }
+        if (porcentagemBalao < 0 || porcentagemBalao > 61 ) {
+            alert("A porcentagem do balão não pode ser maior que 61.");
+            porcentagemBalao = 61;
+            document.getElementById('porcBalao').value = porcentagemBalao;
+        }
+        if (porcentagemBalao + porcentagemEntrada > 100 ) {
+            alert("A soma das porcentagens não pode ser maior que 100% do valor.");
+            porcentagemBalao = 61;
+            porcentagemEntrada = 10;
+            document.getElementById('porcBalao').value = porcentagemBalao;
+            document.getElementById('porcEntrada').value = porcentagemEntrada;
         }
         
-        if (porcBalao < 0 || porcBalao > 61 ) {
-            alert("A porcentagem de balão não pode ser maior que 61.");
-            porcBalao = 61;
-            document.getElementById('porcBalao').value = porcBalao;
-        }
+        const porcentagemParcela = 100 - porcentagemBalao - porcentagemEntrada;
+        const quantParcelas = periodoPagamento * 12 - quantEntrada;
+        const valorEntrada = (valorTotal * porcentagemEntrada / 100) / quantEntrada;
+        const valorBalao = parcela(valorTotal * (porcentagemBalao / 100), 8 / 100, periodoPagamento);
+        const valorParcela = parcela(valorTotal * (porcentagemParcela / 100), ((1 + (8 / 100)) ** (1 / 12)) - 1, quantParcelas);
+        const valorParcela2 = parcela(valorTotal * ((porcentagemBalao + porcentagemParcela) / 100), ((1 + (8 / 100)) ** (1 / 12)) - 1, quantParcelas);
 
-        if (porcBalao + porcEntrada > 100 ) {
-            alert("A soma das porcentagens não pode ser maior que 100% do valor.");
-            porcBalao = 61;
-            porcEntrada = 10;
-            document.getElementById('porcBalao').value = porcBalao;
-            document.getElementById('porcEntrada').value = porcEntrada;
-        }
-
-        const somaPorcentagens = porcEntrada + porcBalao + porcParcela;
-        if (somaPorcentagens !== 100) {
-            porcParcela = 100 - porcBalao - porcEntrada;
-            document.getElementById('porcParcela').value = porcParcela;
-        }
-
-        const quantParcelaElement = document.getElementById('quantParcela');
-        quantParcelaElement.value = paytime * 12 - quantEntrada;
-
-        const quantBalaoElement = document.getElementById('quantBalao');
-        quantBalaoElement.innerText = paytime;
-
-        const total = fullprice * (1 - (discont / 100));
-        const entrada = (total * porcEntrada / 100) / quantEntrada;
-        const balao = parcela(total * (porcBalao / 100), 8 / 100, paytime);
-        const parcelaValor = parcela(total * (porcParcela / 100), ((1 + (8 / 100)) ** (1 / 12)) - 1, paytime * 12 - quantEntrada);
-        const parcelaValor2 = parcela(total * ((porcBalao + porcParcela) / 100), ((1 + (8 / 100)) ** (1 / 12)) - 1, paytime * 12 - quantEntrada);
-
-        document.getElementById('valor_Entrada').innerText = formatarNumero(entrada);
-        document.getElementById('valor_Balao').innerText = formatarNumero(balao);
-        document.getElementById('valor_Parcela').innerText = formatarNumero(parcelaValor);
-        document.getElementById('valor-Total').innerText = formatarNumero(total);
-        document.getElementById('valor_Entrada2').innerText = formatarNumero(entrada);
-        document.getElementById('valor_Parcela2').innerText = formatarNumero(parcelaValor2);
-        document.getElementById('quantBalao').innerText = paytime;
-        document.getElementById('quantParcela').innerText = paytime*12-quantEntrada;
-        document.getElementById('porcParcela').innerText = formatarNumero(100-porcEntrada-porcBalao);
-        document.getElementById('quant_Entrada').innerText = "ENTRADA ("+quantEntrada)+"X)";
-        document.getElementById('quant_Balao').innerText = "BALÃO ("+paytime+"X)";
-        document.getElementById('quant_Parcela').innerText = "PARCELA ("+paytime*12-quantEntrada+"X)";
-        document.getElementById('quant_Entrada2').innerText = "ENTRADA ("+quantEntrada)+"X)";
-        document.getElementById('quant_Parcela2').innerText = "PARCELA ("+paytime*12-quantEntrada+"X)";
+        document.getElementById('valor_Entrada').innerText = formatarNumero(valorEntrada);
+        document.getElementById('valor_Balao').innerText = formatarNumero(valorBalao);
+        document.getElementById('valor_Parcela').innerText = formatarNumero(valorParcela);
+        document.getElementById('valor-Total').innerText = formatarNumero(valorTotal);
+        document.getElementById('valor_Entrada2').innerText = formatarNumero(valorEntrada);
+        document.getElementById('valor_Parcela2').innerText = formatarNumero(valorParcela2);
+        document.getElementById('quantBalao').innerText = periodoPagamento;
+        document.getElementById('quantParcela').innerText = quantParcelas;
+        document.getElementById('porcParcela').innerText = formatarNumero(porcentagemParcela);
+        document.getElementById('quant_Entrada').innerText = "ENTRADA (" + quantEntrada + "X)";
+        document.getElementById('quant_Balao').innerText = "BALÃO (" + periodoPagamento + "X)";
+        document.getElementById('quant_Parcela').innerText = "PARCELA (" + quantParcelas + "X)";
+        document.getElementById('quant_Entrada2').innerText = "ENTRADA (" + quantEntrada + "X)";
+        document.getElementById('quant_Parcela2').innerText = "PARCELA (" + quantParcelas + "X)";
     }, 500);
 }
 
