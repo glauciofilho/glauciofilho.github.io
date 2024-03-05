@@ -43,7 +43,11 @@ function calcularValores() {
             document.getElementById('porcEntrada').value = porcEntrada;
         }
 
-
+        if (porcBalao = null ) {
+            porcBalao = 0;
+            document.getElementById('porcBalao').value = porcBalao;
+        }
+        
         if (porcBalao > 61 ) {
             alert("A porcentagem de balão não pode ser maior que 61.");
             porcBalao = 61;
