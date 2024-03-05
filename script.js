@@ -43,7 +43,7 @@ function calcularValores() {
             document.getElementById('porcEntrada').value = porcEntrada;
         }
 
-        if (porcBalao = null ) {
+        if (porcBalao === null ) {
             porcBalao = 0;
             document.getElementById('porcBalao').value = porcBalao;
         }
