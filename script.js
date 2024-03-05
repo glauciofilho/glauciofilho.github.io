@@ -18,7 +18,7 @@ function calcularValores() {
         let porcBalao = parseFloat(document.getElementById('porcBalao').value);
         let porcParcela = parseFloat(document.getElementById('porcParcela').value);
 
-        if (!isNaN(porcBalao)) {
+        if (isNaN(porcBalao)) {
             porcBalao = 0;
             document.getElementById('porcBalao').value = porcBalao;
         }
