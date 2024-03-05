@@ -127,6 +127,8 @@ function calcularValores() {
         document.getElementById('quant_Entrada').innerText = "ENTRADA ("+quantEntrada)+"X)";
         document.getElementById('quant_Balao').innerText = "BALÃO ("+paytime+"X)";
         document.getElementById('quant_Parcela').innerText = "PARCELA ("+paytime*12-quantEntrada+"X)";
+        document.getElementById('quant_Entrada2').innerText = "ENTRADA ("+quantEntrada)+"X)";
+        document.getElementById('quant_Parcela2').innerText = "PARCELA ("+paytime*12-quantEntrada+"X)";
     }, 500);
 }
 
