@@ -18,7 +18,11 @@ function calcularValores() {
         let porcBalao = parseFloat(document.getElementById('porcBalao').value);
         let porcParcela = parseFloat(document.getElementById('porcParcela').value);
 
-
+        if (porcBalao == null ) {
+            porcBalao = 0;
+            document.getElementById('porcBalao').value = porcBalao;
+        }
+        
         if (paytime < 1 || paytime > 23) {
             alert("A quantidade de tempo de pagamento deve ser entre 1 e 23.");
             paytime = Math.min(Math.max(paytime, 1), 23);
@@ -41,11 +45,6 @@ function calcularValores() {
             alert("A porcentagem de entrada deve ser no máximo 100.");
             porcEntrada = 10;
             document.getElementById('porcEntrada').value = porcEntrada;
-        }
-
-        if (porcBalao === null ) {
-            porcBalao = 0;
-            document.getElementById('porcBalao').value = porcBalao;
         }
         
         if (porcBalao > 61 ) {
