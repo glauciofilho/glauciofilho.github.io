@@ -12,7 +12,7 @@ function calcularValores() {
     timeoutId = setTimeout(function () {
         const fullprice = parseFloat(document.getElementById('fullprice').value);
         let paytime = parseInt(document.getElementById('paytime').value);
-        const discont = parseFloat(document.getElementById('discont').value);
+        let discont = parseFloat(document.getElementById('discont').value);
         let quantEntrada = parseInt(document.getElementById('quantEntrada').value);
         let porcEntrada = parseFloat(document.getElementById('porcEntrada').value);
         let porcBalao = parseFloat(document.getElementById('porcBalao').value);
@@ -59,6 +59,12 @@ function calcularValores() {
             document.getElementById('paytime').value = paytime;
         }
 
+        if (discont < 0 || discont > 100) {
+            alert("Disconto tem que ser entre 0 e 100%.");
+            discont = 0;
+            document.getElementById('discont').value = discont;
+        }
+
         if (quantEntrada < 1 || quantEntrada > 4) {
             alert("A quantidade de entrada deve ser um número entre 1 e 4.");
             quantEntrada = Math.min(Math.max(quantEntrada, 1), 4);
@@ -77,7 +83,7 @@ function calcularValores() {
             document.getElementById('porcEntrada').value = porcEntrada;
         }
         
-        if (porcBalao > 61 ) {
+        if (porcBalao < 0 || porcBalao > 61 ) {
             alert("A porcentagem de balão não pode ser maior que 61.");
             porcBalao = 61;
             document.getElementById('porcBalao').value = porcBalao;
@@ -117,6 +123,8 @@ function calcularValores() {
         document.getElementById('valor_Parcela2').innerText = formatarNumero(parcelaValor2);
         document.getElementById('quantBalao').innerText = paytime;
         document.getElementById('quantParcela').innerText = paytime*12-quantEntrada;
+        document.getElementById('porcParcela').innerText = formatarNumero(100-porcEntrada-porcBalao);
+        document.getElementById('porcParcela').innerText = formatarNumero(100-porcEntrada-porcBalao);
         document.getElementById('porcParcela').innerText = formatarNumero(100-porcEntrada-porcBalao);
     }, 500);
 }
