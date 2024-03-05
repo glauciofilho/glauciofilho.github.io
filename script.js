@@ -42,6 +42,11 @@ function calcularValores() {
             document.getElementById('porcBalao').value = porcentagemBalao;
         }
         
+        if (valorTotal < 0 || valorTotal > 10000000) {
+            alert("Essa calculadora permite somente valores positivos até R$ 10.000.000,00");
+            valorTotal = 300000;
+            document.getElementById('fullprice').value = valorTotal;
+        }
         if (periodoPagamento < 1 || periodoPagamento > 23) {
             alert("O período de pagamento deve estar entre 1 e 23 anos.");
             periodoPagamento = Math.min(Math.max(periodoPagamento, 1), 23);
