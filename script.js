@@ -10,7 +10,7 @@ function formatarNumero(valor) {
 function calcularValores() {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(function () {
-        const fullprice = parseFloat(document.getElementById('fullprice').value);
+        let fullprice = parseFloat(document.getElementById('fullprice').value);
         let paytime = parseInt(document.getElementById('paytime').value);
         let discont = parseFloat(document.getElementById('discont').value);
         let quantEntrada = parseInt(document.getElementById('quantEntrada').value);
