@@ -16,7 +16,6 @@ function calcularValores() {
         let quantEntrada = parseInt(document.getElementById('quantEntrada').value);
         let porcEntrada = parseFloat(document.getElementById('porcEntrada').value);
         let porcBalao = parseFloat(document.getElementById('porcBalao').value);
-        let porcParcela = parseFloat(document.getElementById('porcParcela').value);
 
         if (isNaN(fullprice)) {
             fullprice = 0;
