@@ -18,10 +18,40 @@ function calcularValores() {
         let porcBalao = parseFloat(document.getElementById('porcBalao').value);
         let porcParcela = parseFloat(document.getElementById('porcParcela').value);
 
+        if (isNaN(fullprice)) {
+            fullprice = 0;
+            document.getElementById('fullprice').value = fullprice;
+        }
+        
+        if (isNaN(paytime)) {
+            paytime = 0;
+            document.getElementById('paytime').value = paytime;
+        }
+
+        if (isNaN(discont)) {
+            discont = 0;
+            document.getElementById('discont').value = discont;
+        }
+
+        if (isNaN(quantEntrada)) {
+            quantEntrada = 0;
+            document.getElementById('quantEntrada').value = quantEntrada;
+        }
+
+        if (isNaN(porcEntrada)) {
+            porcEntrada = 0;
+            document.getElementById('porcEntrada').value = porcEntrada;
+        }
+
         if (isNaN(porcBalao)) {
             porcBalao = 0;
             document.getElementById('porcBalao').value = porcBalao;
         }
+
+        if (isNaN(porcParcela)) {
+            porcParcela = 0;
+            document.getElementById('porcParcela').value = porcParcela;
+        }        
         
         if (paytime < 1 || paytime > 23) {
             alert("A quantidade de tempo de pagamento deve ser entre 1 e 23.");
