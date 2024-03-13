@@ -1,5 +1,3 @@
-let timeoutId;
-
 function formatarNumero(valor) {
     const numeroFormatado = parseFloat(valor).toFixed(2);
     const partes = numeroFormatado.split('.');
@@ -8,8 +6,6 @@ function formatarNumero(valor) {
 }
 
 function calcularValores() {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(function () {
         let valorTotal = parseFloat(document.getElementById('fullprice').value);
         let periodoPagamento = parseInt(document.getElementById('paytime').value);
         let desconto = parseFloat(document.getElementById('discont').value);
@@ -106,27 +102,9 @@ function calcularValores() {
         document.getElementById('quant_Parcela').innerText = "PARCELA (" + quantParcelas + "X)";
         document.getElementById('quant_Entrada2').innerText = "ENTRADA (" + quantEntrada + "X)";
         document.getElementById('quant_Parcela2').innerText = "PARCELA (" + quantParcelas + "X)";
-    }, 500);
 }
 
 function parcela(preco, taxa, quant) {
     const parcela = preco * (taxa * ((1 + taxa) ** quant)) / (((1 + taxa) ** quant) - 1);
     return parcela;
 }
-
-document.getElementById('fullprice').addEventListener('input', calcularValores);
-document.getElementById('paytime').addEventListener('input', function () {
-    calcularValores();
-});
-document.getElementById('discont').addEventListener('input', calcularValores);
-document.getElementById('quantEntrada').addEventListener('input', function () {
-    calcularValores();
-});
-document.getElementById('porcEntrada').addEventListener('input', function () {
-    calcularValores();
-});
-document.getElementById('porcBalao').addEventListener('input', function () {
-    calcularValores();
-});
-
-calcularValores();
