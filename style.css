@@ -164,6 +164,6 @@ button{
     img {
         width: 75%;
         position: relative;
-        justify-content: center;
+        align-items: center;
     }
 }
