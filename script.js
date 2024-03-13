@@ -99,6 +99,7 @@ function calcularValores() {
         }else{
             quantBalao1 = quantBalao
         };
+        valorTotal = valorTotal*(100-desconto)/100;
         const porcentagemParcela = 100 - porcentagemBalao - porcentagemEntrada;
         const quantParcelas = periodoPagamento - quantEntrada;
         const valorEntrada = (valorTotal * porcentagemEntrada / 100) / quantEntrada;
