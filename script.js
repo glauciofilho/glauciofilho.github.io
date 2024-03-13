@@ -37,7 +37,6 @@ function calcularValores() {
             porcentagemBalao = 0;
             document.getElementById('porcBalao').value = porcentagemBalao;
         }
-        
         if (valorTotal < 0 || valorTotal > 10000000) {
             alert("Essa calculadora permite somente valores positivos até R$ 10.000.000,00");
             valorTotal = 300000;
@@ -80,7 +79,7 @@ function calcularValores() {
             document.getElementById('porcBalao').value = porcentagemBalao;
             document.getElementById('porcEntrada').value = porcentagemEntrada;
         }
-        
+
         const porcentagemParcela = 100 - porcentagemBalao - porcentagemEntrada;
         const quantParcelas = periodoPagamento * 12 - quantEntrada;
         const valorEntrada = (valorTotal * porcentagemEntrada / 100) / quantEntrada;
