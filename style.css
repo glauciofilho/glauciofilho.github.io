@@ -45,7 +45,12 @@ body {
     justify-content: center;
 }
 
-.form-header h1{
+.h1{
+    justify-content: center;
+    text-align: center;
+}
+
+.h2{
     justify-content: center;
     text-align: center;
 }
@@ -91,7 +96,7 @@ body {
 }
 
 .results-show p{
-    margin-top: 1.1rem;
+    margin: 0.6rem 0;
 }
 
 .results-align{
@@ -120,7 +125,6 @@ body {
     padding: 0.8rem 1.2rem;
     display: flex;
     flex-direction: row;
-    margin-bottom: 1.1rem;
 }
 
 .input-box label{
