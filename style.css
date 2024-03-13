@@ -154,10 +154,10 @@ button{
 }
 
 .logo {
-    position: absolute;
-    right: 1%;
+    position: relative;
+    justify-content: center;
     bottom: 5px;
-    width: 50px;
+    width: auto;
     height: auto;
     margin-top: 5px;
 }

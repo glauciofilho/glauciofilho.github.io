@@ -93,11 +93,16 @@ function calcularValores() {
             document.getElementById('porcBalao').value = porcentagemBalao;
             document.getElementById('porcEntrada').value = porcentagemEntrada;
         }
-
+        let quantBalao1;
+        if (quantBalao == 0){
+            quantBalao1 = 1
+        }else{
+            quantBalao1 = quantBalao
+        };
         const porcentagemParcela = 100 - porcentagemBalao - porcentagemEntrada;
         const quantParcelas = periodoPagamento - quantEntrada;
         const valorEntrada = (valorTotal * porcentagemEntrada / 100) / quantEntrada;
-        const valorBalao = parcela(valorTotal * (porcentagemBalao / 100), 8 / 100, quantBalao);
+        const valorBalao = parcela(valorTotal * (porcentagemBalao / 100), 8 / 100, quantBalao1);
         const valorParcela = parcela(valorTotal * (porcentagemParcela / 100), ((1 + (8 / 100)) ** (1 / 12)) - 1, quantParcelas);
         const valorParcela2 = parcela(valorTotal * ((porcentagemBalao + porcentagemParcela) / 100), ((1 + (8 / 100)) ** (1 / 12)) - 1, quantParcelas);
 
