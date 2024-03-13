@@ -156,14 +156,15 @@ button{
 .logo {
     position: relative;
     justify-content: center;
-    margin-top: 1em;
-    margin-bottom: 2em;
+    margin: 1em auto 2em;
 }
 
 @media (max-width: 768px) {
     img {
         width: 75%;
         position: relative;
-        align-items: center;
+        text-align: center;
+        justify-content: center;
+        margin: 1em auto 2em;
     }
 }
