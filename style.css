@@ -16,7 +16,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('img/Fundo.png');
+    linear-gradient( to bottom, #007F93, #183e34)
     background-size: cover;
     background-position: top;
 }
