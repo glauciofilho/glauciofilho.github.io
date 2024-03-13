@@ -47,6 +47,10 @@ body {
     justify-content: center;
 }
 
+.form-header h1{
+    text-align: center;
+}
+
 .form-header h1::after{
     content: '';
     display: block;
@@ -60,7 +64,7 @@ body {
 .results{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 1%;
 }
 
@@ -136,6 +140,6 @@ body {
 }
 
 .logo {
-    position: relative;
+    position: absolute;
     bottom: 1%;
 }
