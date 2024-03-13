@@ -137,15 +137,15 @@ body {
 }
 
 button{
-    margin-left: auto;
     border: none;
     border-radius: 3px;
     background-color: #E0CA96;
     color: #000;
     padding: 0.5rem;
-    text-align: right;
+    text-align: center;
+    justify-content: center;
     box-sizing: border-box;
-    position: center;
+    position: relative;
 }
 
 .logo {
