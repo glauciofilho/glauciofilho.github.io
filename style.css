@@ -47,6 +47,11 @@ body {
     justify-content: center;
 }
 
+.form-header h1{
+    justify-content: center;
+    text-align: center;
+}
+
 .form-header h1::after{
     content: '';
     display: block;
@@ -62,11 +67,6 @@ body {
     flex-wrap: wrap;
     justify-content: space-evenly;
     padding: 1%;
-}
-
-.results h2{
-    justify-content: center;
-    text-align: center;
 }
 
 .results h2::after{
