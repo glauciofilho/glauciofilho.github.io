@@ -16,8 +16,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    linear-gradient( to bottom, #007F93, #183e34)
-    background-size: cover;
+    background-color: linear-gradient( to bottom, #007F93, #183e34);
     background-position: top;
 }
 
