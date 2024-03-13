@@ -11,6 +11,7 @@ function calcularValores() {
         let desconto = parseFloat(document.getElementById('discont').value);
         let quantEntrada = parseInt(document.getElementById('quantEntrada').value);
         let porcentagemEntrada = parseFloat(document.getElementById('porcEntrada').value);
+        let quantBalao = parseFloat(document.getElementById('quantBalao').value);
         let porcentagemBalao = parseFloat(document.getElementById('porcBalao').value);
 
         if (isNaN(valorTotal)) {
@@ -33,6 +34,10 @@ function calcularValores() {
             porcentagemEntrada = 0;
             document.getElementById('porcEntrada').value = porcentagemEntrada;
         }
+        if (isNaN(quantBalao)) {
+            quantBalao = 0;
+            document.getElementById('quantBalao').value = quantBalao;
+        }
         if (isNaN(porcentagemBalao)) {
             porcentagemBalao = 0;
             document.getElementById('porcBalao').value = porcentagemBalao;
@@ -42,9 +47,9 @@ function calcularValores() {
             valorTotal = 300000;
             document.getElementById('fullprice').value = valorTotal;
         }
-        if (periodoPagamento < 1 || periodoPagamento > 23) {
-            alert("O período de pagamento deve estar entre 1 e 23 anos.");
-            periodoPagamento = Math.min(Math.max(periodoPagamento, 1), 23);
+        if (periodoPagamento < 1 || periodoPagamento > 276) {
+            alert("O período de pagamento deve estar entre 1 e 276 meses.");
+            periodoPagamento = Math.min(Math.max(periodoPagamento, 1), 276);
             document.getElementById('paytime').value = periodoPagamento;
         }
         if (desconto < 0 || desconto > 100) {
@@ -67,6 +72,15 @@ function calcularValores() {
             porcentagemEntrada = 10;
             document.getElementById('porcEntrada').value = porcentagemEntrada;
         }
+        if (quantBalao < 0 || quantBalao > 23) {
+            alert("A quantidade de parcelas da balões deve ser um número entre 0 e 23.");
+            quantEntrada = Math.min(Math.max(quantEntrada, 1), 23);
+            document.getElementById('quantBalao').value = quantBalao;
+        }
+        if (quantBalao == 0) {
+            porcentagemBalao = 0;
+            document.getElementById('porcBalao').value = porcentagemBalao;
+        }
         if (porcentagemBalao < 0 || porcentagemBalao > 61 ) {
             alert("A porcentagem do balão não pode ser maior que 61.");
             porcentagemBalao = 61;
@@ -81,9 +95,9 @@ function calcularValores() {
         }
 
         const porcentagemParcela = 100 - porcentagemBalao - porcentagemEntrada;
-        const quantParcelas = periodoPagamento * 12 - quantEntrada;
+        const quantParcelas = periodoPagamento - quantEntrada;
         const valorEntrada = (valorTotal * porcentagemEntrada / 100) / quantEntrada;
-        const valorBalao = parcela(valorTotal * (porcentagemBalao / 100), 8 / 100, periodoPagamento);
+        const valorBalao = parcela(valorTotal * (porcentagemBalao / 100), 8 / 100, quantBalao);
         const valorParcela = parcela(valorTotal * (porcentagemParcela / 100), ((1 + (8 / 100)) ** (1 / 12)) - 1, quantParcelas);
         const valorParcela2 = parcela(valorTotal * ((porcentagemBalao + porcentagemParcela) / 100), ((1 + (8 / 100)) ** (1 / 12)) - 1, quantParcelas);
 
@@ -93,14 +107,15 @@ function calcularValores() {
         document.getElementById('valor-Total').innerText = formatarNumero(valorTotal);
         document.getElementById('valor_Entrada2').innerText = formatarNumero(valorEntrada);
         document.getElementById('valor_Parcela2').innerText = formatarNumero(valorParcela2);
-        document.getElementById('quantBalao').innerText = periodoPagamento;
+        document.getElementById('quantBalao').innerText = quantBalao;
         document.getElementById('quantParcela').innerText = quantParcelas;
         document.getElementById('porcParcela').innerText = porcentagemParcela;
         document.getElementById('quant_Entrada').innerText = "ENTRADA (" + quantEntrada + "X)";
-        document.getElementById('quant_Balao').innerText = "BALÃO (" + periodoPagamento + "X)";
+        document.getElementById('quant_Balao').innerText = "BALÃO (" + quantBalao + "X)";
         document.getElementById('quant_Parcela').innerText = "PARCELA (" + quantParcelas + "X)";
         document.getElementById('quant_Entrada2').innerText = "ENTRADA (" + quantEntrada + "X)";
         document.getElementById('quant_Parcela2').innerText = "PARCELA (" + quantParcelas + "X)";
+        window.scrollTo({top:0, behavior: 'smooth'});
 }
 
 function parcela(preco, taxa, quant) {
