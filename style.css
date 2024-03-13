@@ -145,6 +145,7 @@ button{
     padding: 0.5rem;
     text-align: right;
     box-sizing: border-box;
+    position: center;
 }
 
 .logo {
