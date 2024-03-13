@@ -96,7 +96,7 @@ function calcularValores() {
         document.getElementById('valor_Parcela2').innerText = formatarNumero(valorParcela2);
         document.getElementById('quantBalao').innerText = periodoPagamento;
         document.getElementById('quantParcela').innerText = quantParcelas;
-        document.getElementById('porcParcela').innerText = formatarNumero(porcentagemParcela);
+        document.getElementById('porcParcela').innerText = porcentagemParcela;
         document.getElementById('quant_Entrada').innerText = "ENTRADA (" + quantEntrada + "X)";
         document.getElementById('quant_Balao').innerText = "BALÃO (" + periodoPagamento + "X)";
         document.getElementById('quant_Parcela').innerText = "PARCELA (" + quantParcelas + "X)";
