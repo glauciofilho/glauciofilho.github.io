@@ -136,6 +136,10 @@ body {
     box-sizing: border-box;
 }
 
+.buttom{
+    container: #E0CA96;
+}
+
 .logo {
     position: absolute;
     right: 1%;
