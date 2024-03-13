@@ -136,12 +136,11 @@ body {
 }
 
 button{
-    border: #fff;
-    border-wigth: 2px;
-    border-radius: 5px;
+    border: none;
+    border-radius: 25px;
     background-color: #E0CA96;
-    color: #fff;
-    padding: 0.5rem;
+    color: #283D52;
+    padding: 2em;
     text-align: center;
     justify-content: center;
     box-sizing: border-box;
