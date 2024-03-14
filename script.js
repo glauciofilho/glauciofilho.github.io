@@ -47,9 +47,9 @@ function calcularValores() {
             valorTotal = 300000;
             document.getElementById('fullprice').value = valorTotal;
         }
-        if (periodoPagamento < 1 || periodoPagamento > 276) {
-            alert("O período de pagamento deve estar entre 1 e 276 meses.");
-            periodoPagamento = Math.min(Math.max(periodoPagamento, 1), 276);
+        if (periodoPagamento < 12 || periodoPagamento > 276) {
+            alert("O período de pagamento deve estar entre 12 e 276 meses.");
+            periodoPagamento = Math.min(Math.max(periodoPagamento, 12), 276);
             document.getElementById('paytime').value = periodoPagamento;
         }
         if (desconto < 0 || desconto > 100) {
@@ -75,6 +75,20 @@ function calcularValores() {
         if (quantBalao < 0 || quantBalao > 23) {
             alert("A quantidade de parcelas da balões deve ser um número entre 0 e 23.");
             quantEntrada = Math.min(Math.max(quantEntrada, 1), 23);
+            document.getElementById('quantBalao').value = quantBalao;
+        }
+        periodoPagamentoAno=Math.round(periodoPagamento/12);
+        if (periodoPagamentoAno*12>periodoPagamento){
+            periodoPagamentoAno=periodoPagamentoAno-1;
+        }
+        if(periodoPagamentoAno==1){
+            plural="";
+        }else{
+            plural="s";
+        }
+        if (quantBalao > periodoPagamentoAno) {
+            alert("O periodo digitado é de "+periodoPagamentoAno+" ano"+plural+", portanto coloque a quuantidade de balões coerente.");
+            quantBalao = periodoPagamentoAno;
             document.getElementById('quantBalao').value = quantBalao;
         }
         if (quantBalao == 0) {
