@@ -62,8 +62,8 @@ function calcularValores() {
             quantEntrada = Math.min(Math.max(quantEntrada, 1), 4);
             document.getElementById('quantEntrada').value = quantEntrada;
         }
-        if (porcentagemEntrada < 10) {
-            alert("A porcentagem da entrada deve ser no mínimo 10.");
+        if (porcentagemEntrada < 6) {
+            alert("A porcentagem da entrada deve ser no mínimo 6.");
             porcentagemEntrada = 10;
             document.getElementById('porcEntrada').value = porcentagemEntrada;
         }
