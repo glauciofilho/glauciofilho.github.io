@@ -7,20 +7,16 @@ function formatarNumero(valor) {
 
 function calcularValores() {
         let valorTotal = parseFloat(document.getElementById('fullprice').value);
-        let periodoPagamento = parseInt(document.getElementById('paytime').value);
         let desconto = parseFloat(document.getElementById('discont').value);
         let quantEntrada = parseInt(document.getElementById('quantEntrada').value);
         let porcentagemEntrada = parseFloat(document.getElementById('porcEntrada').value);
         let quantBalao = parseFloat(document.getElementById('quantBalao').value);
         let porcentagemBalao = parseFloat(document.getElementById('porcBalao').value);
+        let quantParcela = parseInt(document.getElementById('quantParcela').value);
 
         if (isNaN(valorTotal)) {
             valorTotal = 0;
             document.getElementById('fullprice').value = valorTotal;
-        }
-        if (isNaN(periodoPagamento)) {
-            periodoPagamento = 0;
-            document.getElementById('paytime').value = periodoPagamento;
         }
         if (isNaN(desconto)) {
             desconto = 0;
@@ -42,29 +38,28 @@ function calcularValores() {
             porcentagemBalao = 0;
             document.getElementById('porcBalao').value = porcentagemBalao;
         }
+        if (isNaN(quantParcela)) {
+            quantParcela = 0;
+            document.getElementById('quantParcela').value = quantParcela;
+        }
         if (valorTotal < 0 || valorTotal > 10000000) {
             alert("Essa calculadora permite somente valores positivos até R$ 10.000.000,00");
-            valorTotal = 300000;
+            valorTotal = 500000;
             document.getElementById('fullprice').value = valorTotal;
-        }
-        if (periodoPagamento < 12 || periodoPagamento > 276) {
-            alert("O período de pagamento deve estar entre 12 e 276 meses.");
-            periodoPagamento = Math.min(Math.max(periodoPagamento, 12), 276);
-            document.getElementById('paytime').value = periodoPagamento;
         }
         if (desconto < 0 || desconto > 100) {
             alert("O desconto deve estar entre 0 e 100%.");
             desconto = 0;
             document.getElementById('discont').value = desconto;
         }
-        if (quantEntrada < 1 || quantEntrada > 4) {
-            alert("A quantidade de parcelas da entrada deve ser um número entre 1 e 4.");
-            quantEntrada = Math.min(Math.max(quantEntrada, 1), 4);
+        if (quantEntrada < 1 || quantEntrada > 5) {
+            alert("A quantidade de parcelas da entrada deve ser um número entre 1 e 5.");
+            quantEntrada = Math.min(Math.max(quantEntrada, 1), 5);
             document.getElementById('quantEntrada').value = quantEntrada;
         }
-        if (porcentagemEntrada < 10) {
-            alert("A porcentagem da entrada deve ser no mínimo 10.");
-            porcentagemEntrada = 10;
+        if (porcentagemEntrada < 6) {
+            alert("A porcentagem da entrada deve ser no mínimo 6.");
+            porcentagemEntrada = 6;
             document.getElementById('porcEntrada').value = porcentagemEntrada;
         }
         if (porcentagemEntrada > 100) {
@@ -74,10 +69,15 @@ function calcularValores() {
         }
         if (quantBalao < 0 || quantBalao > 23) {
             alert("A quantidade de parcelas da balões deve ser um número entre 0 e 23.");
-            quantEntrada = Math.min(Math.max(quantEntrada, 1), 23);
+            quantBalao = Math.min(Math.max(quantEntrada, 1), 23);
             document.getElementById('quantBalao').value = quantBalao;
         }
-        periodoPagamentoAno=Math.round(periodoPagamento/12);
+        if (quantParcela > 276) {
+            alert("O período de pagamento deve ser menor ou igual a 276 meses.");
+            quantParcela = Math.min(Math.max(quantParcela, 0), 276);
+            document.getElementById('quantParcela').value = periodoPagamento;
+        }
+        periodoPagamentoAno=Math.round((quantBalao+quantParcela)/12);
         if (periodoPagamentoAno*12>periodoPagamento){
             periodoPagamentoAno=periodoPagamentoAno-1;
         }
@@ -115,7 +115,6 @@ function calcularValores() {
         };
         valorTotal = valorTotal*(100-desconto)/100;
         const porcentagemParcela = 100 - porcentagemBalao - porcentagemEntrada;
-        const quantParcelas = periodoPagamento - quantEntrada;
         const valorEntrada = (valorTotal * porcentagemEntrada / 100) / quantEntrada;
         const valorBalao = parcela(valorTotal * (porcentagemBalao / 100), 8 / 100, quantBalao1);
         const valorParcela = parcela(valorTotal * (porcentagemParcela / 100), ((1 + (8 / 100)) ** (1 / 12)) - 1, quantParcelas);
