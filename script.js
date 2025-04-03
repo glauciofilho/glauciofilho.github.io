@@ -59,11 +59,7 @@ function calcularValores() {
         }
         if (porcentagemEntrada < 6) {
             alert("A porcentagem da entrada deve ser no mínimo 6.");
-<<<<<<< HEAD
             porcentagemEntrada = 6;
-=======
-            porcentagemEntrada = 10;
->>>>>>> be82425b7d361784ef4f5f4f08ab8d38863626cf
             document.getElementById('porcEntrada').value = porcentagemEntrada;
         }
         if (porcentagemEntrada > 100) {
