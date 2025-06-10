@@ -13,79 +13,85 @@
             <form id = "form" class="form" action="#">
                 <div class="form-header">
                     <div class="title">
-                        <h1>SIMULADOR GRAN</h1>
+                        <h2>SIMULADOR PARCELAS</h2>
                     </div>
                 </div>
-                <div class="results">
-                    <div class="results-titulo">
-                        <h2>COM BALÃO</h2>
-                        <div class="results-show">
-                            <div class="results-box"><p id="quant_Entrada">ENTRADA (4X)</p><p id="quant_Balao">BALÃO (23X)</p><p id="quant_Parcela">PARCELA (272X)</p></div>
-                            <div class="results-box"><p>R$</p><p>R$</p><p>R$</p></div>
-                            <div class="results-align"><p id="valor_Entrada">7.500,00</p><p id="valor_Balao">29.408,76</p><p id="valor_Parcela">1.286,40</p></div>
+                <div class="content">
+                    <div class="results">
+                        <div class="results-titulo">
+                            <h4>COM BALÃO</h4>
+                            <div class="results-show">
+                                <div class="results-type"><p id="quant_Entrada">ENTRADA (4X)</p><p id="quant_Balao">BALÃO (23X)</p><p id="quant_Parcela">PARCELA (272X)</p></div>
+                                <div class="results-box"><p>R$</p><p>R$</p><p>R$</p></div>
+                                <div class="results-align"><p id="valor_Entrada">7.500,00</p><p id="valor_Balao">29.408,76</p><p id="valor_Parcela">1.286,40</p></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="results-titulo">
-                        <h2>SEM BALÃO</h2>
-                        <div class="results-show">
-                            <div class="results-box"><p id="quant_Entrada2">ENTRADA (4X)</p><p id="quant_Parcela2">PARCELA (272X)</p></div>
-                            <div class="results-box"><p>R$</p><p>R$</p></div>
-                            <div class="results-align"><p id="valor_Entrada2">7.500,00</p><p id="valor_Parcela2">3.664,30</p></div>
+                        <div class="results-titulo">
+                            <h4>SEM BALÃO</h4>
+                            <div class="results-show">
+                                <div class="results-type"><p id="quant_Entrada2">ENTRADA (4X)</p><p id="quant_Parcela2">PARCELA (272X)</p></div>
+                                <div class="results-box"><p>R$</p><p>R$</p></div>
+                                <div class="results-align"><p id="valor_Entrada2">7.500,00</p><p id="valor_Parcela2">3.664,30</p></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="results-titulo">
-                        <h2>VALOR</h2>
-                        <div class="results-show">
-                            <div class="results-align"><p>R$</p></div>
-                            <div class="results-box">
-                                <p id="valor-Total">500.000,00</p>
+                        <div class="results-titulo">
+                            <h4>VALOR PARCELAVEL</h4>
+                            <div class="results-show">
+                                <div class="results-align"><p>R$</p></div>
+                                <div class="results-box">
+                                    <p id="valor-Total">500.000,00</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="input-group">
-                    <div class="input-titulo">
-                        <h2>TOTAL</h2>
-                        <div class="input-box">
-                            <label for="fullprice">VALOR</label>
-                            <input id="fullprice" type="number" name="fullprice" value= 500000 oninput="formatarMoeda(this)" required>
+                    <div class="all-input">
+                        <div class="input-group">
+                            <div class="input-titulo">
+                                <h4>TOTAL</h4>
+                                <div class="input-box">
+                                    <label for="fullprice">VALOR</label>
+                                    <input id="fullprice" type="number" name="fullprice" value= 500000 oninput="formatarMoeda(this)" required>
+                                </div>
+                                <div class="input-box">
+                                    <label for="discont">DESCONTO (%)</label>
+                                    <input id="discont" type="number" name="discont" value=0 required>
+                                </div>
+                            </div>
+                            <div class="input-titulo">
+                                <h4>ENTRADA</h4>
+                                <div class="input-box">
+                                    <label for="quantEntrada">QUANT. PARCELAS</label>
+                                    <input id="quantEntrada" type="number" name="quantEntrada" value=4 required>
+                                </div>
+                                <div class="input-box">
+                                    <label for="porcEntrada">% DO VALOR</label>
+                                    <input id="porcEntrada" type="number" name="porcEntrada" value=6 required>
+                                </div>
+                            </div>
                         </div>
-                        <div class="input-box">
-                            <label for="discont">DESCONTO (%)</label>
-                            <input id="discont" type="number" name="discont" value=0 required>
-                        </div>
-                    </div>
-                    <div class="input-titulo">
-                        <h2>ENTRADA</h2>
-                        <div class="input-box">
-                            <label for="quantEntrada">QUANT. PARCELAS</label>
-                            <input id="quantEntrada" type="number" name="quantEntrada" value=4 required>
-                        </div>
-                        <div class="input-box">
-                            <label for="porcEntrada">% DO VALOR</label>
-                            <input id="porcEntrada" type="number" name="porcEntrada" value=6 required>
-                        </div>
-                    </div>
-                    <div class="input-titulo">
-                        <h2>BALÃO ANUAL</h2>
-                        <div class="input-box">
-                            <label for="quantBalao">QUANT. BALÕES</label>
-                            <input id="quantBalao" type="number" name="quantBalao" value=23 required>
-                        </div>
-                        <div class="input-box">
-                            <label for="porcBalao">% DO VALOR</label>
-                            <input id="porcBalao" type="number" name="porcBalao" value=61 required>
-                        </div>
-                    </div>
-                    <div class="input-titulo">
-                        <h2>PARCELA MENSAL</h2>
-                        <div class="input-box">
-                            <label for="quantParcela">QUANT.PARCELAS</label>
-                            <input id="quantParcela" type="number" name="quantParcela" value=276 required>
-                        </div>
-                        <div class="results-show">
-                            <div class="results-box"><p>% DO VALOR</p></div>
-                            <div class="results-align"><p id="porcParcela">33</p></div>
+                        <div class="input-group">
+                            <div class="input-titulo">
+                                <h4>BALÃO ANUAL</h4>
+                                <div class="input-box">
+                                    <label for="quantBalao">QUANT. BALÕES</label>
+                                    <input id="quantBalao" type="number" name="quantBalao" value=23 required>
+                                </div>
+                                <div class="input-box">
+                                    <label for="porcBalao">% DO VALOR</label>
+                                    <input id="porcBalao" type="number" name="porcBalao" value=61 required>
+                                </div>
+                            </div>
+                            <div class="input-titulo">
+                                <h4>PARCELA MENSAL</h4>
+                                <div class="input-box">
+                                    <label for="quantParcela">QUANT.PARCELAS</label>
+                                    <input id="quantParcela" type="number" name="quantParcela" value=276 required>
+                                </div>
+                                <div class="input-box">
+                                    <div class="results-box"><label>% DO VALOR</label></div>
+                                    <div class="results-align"><label id="porcParcela">33</label></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
