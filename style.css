@@ -8,9 +8,11 @@
     box-sizing: border-box;
     font-family: Nexa_Bold;
 }
+
 .container {
     justify-content: center;
     background-color: #003B55;
+    width: 100%;
 }
 
 .form{
@@ -20,6 +22,7 @@
     flex-direction: column;
     flex-wrap: nowrap;
     padding: 1%;
+    width: 100%;
 }
 
 .form-header{
@@ -33,6 +36,7 @@
 }
 
 .content{
+    width: 100%;
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: wrap;
@@ -83,13 +87,19 @@ label{
     text-align: right;
 }
 
+.left{
+    justify-content: center;
+}
+
 .all-input{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 1%;
-    flex-grow: 1;
     background-color: #002D43;
+    justify-content: center;
+    border-radius: 1rem;
+    margin: 1rem;
 }
 
 .input-group{
