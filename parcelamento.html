@@ -17,9 +17,12 @@
 </head>
 <body class="bg-[#003B55] text-white min-h-screen flex justify-center lg:items-center p-4 sm:p-8">
 
-    <div class="relative w-full max-w-6xl mx-auto pt-24 lg:pt-0">
+    <img src="img/flor.png" alt="" class="fixed bottom-0 left-0 w-48 h-auto hidden lg:block z-10">
+    <img src="img/flor.png" alt="" class="fixed top-0 right-0 w-48 h-auto hidden lg:block rotate-180 z-10">
 
-        <a href="parcelamento.html" class="absolute top-8 left-1/2 -translate-x-1/2 z-10 w-32 h-auto lg:left-8 lg:translate-x-0">
+    <div class="relative w-full max-w-6xl mx-auto pt-24 lg:pt-0 z-20">
+
+        <a href="parcelamento.html" class="absolute top-0 left-1/2 -translate-x-1/2 z-10 w-32 h-auto lg:left-8 lg:translate-x-0">
             <img src="img/granlago_logo.png" alt="Logo Gran Lago">
         </a>
 
@@ -31,35 +34,74 @@
 
             <div class="w-full flex flex-col lg:flex-row-reverse gap-8">
                 <div class="flex flex-col gap-6 lg:w-1/3">
-                    <div class="bg-[#002D43] p-6 rounded-xl space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">COM BALÃO</h4><div class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4"><div class="text-sm space-y-2"><p id="quant_Entrada" class="truncate">ENTRADA (4X)</p><p id="quant_Balao" class="truncate">BALÃO (23X)</p><p id="quant_Parcela" class="truncate">PARCELA (272X)</p></div><div class="text-sm space-y-2"><p>R$</p><p>R$</p><p>R$</p></div><div class="text-right font-bold space-y-2"><p id="valor_Entrada">7.500,00</p><p id="valor_Balao">29.408,76</p><p id="valor_Parcela">1.286,40</p></div></div></div>
-                    <div class="bg-[#002D43] p-6 rounded-xl space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">SEM BALÃO</h4><div class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4"><div class="text-sm space-y-2"><p id="quant_Entrada2" class="truncate">ENTRADA (4X)</p><p id="quant_Parcela2" class="truncate">PARCELA (272X)</p></div><div class="text-sm space-y-2"><p>R$</p><p>R$</p></div><div class="text-right font-bold space-y-2"><p id="valor_Entrada2">7.500,00</p><p id="valor_Parcela2">3.664,30</p></div></div></div>
-                    <div class="bg-[#002D43] p-6 rounded-xl flex xl:hidden items-center justify-between"><h4 class="text-[#BDA887] font-bold text-lg flex flex-col leading-tight"><span>VALOR</span><span>PARCELÁVEL</span></h4><div class="flex items-center gap-2"><p class="text-lg">R$</p><p id="valor-Total-B" class="text-2xl font-bold">500.000,00</p></div></div>
+                    <div class="bg-[#002D43] p-6 rounded-xl space-y-4">
+                        <h4 class="text-[#BDA887] font-bold text-lg">COM BALÃO</h4>
+                        <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4">
+                            <div class="text-sm space-y-2"><p id="quant_Entrada" class="truncate">ENTRADA (4X)</p><p id="quant_Balao" class="truncate">BALÃO (23X)</p><p id="quant_Parcela" class="truncate">PARCELA (272X)</p></div>
+                            <div class="text-sm space-y-2"><p>R$</p><p>R$</p><p>R$</p></div>
+                            <div class="text-right font-bold space-y-2"><p id="valor_Entrada">7.500,00</p><p id="valor_Balao">29.408,76</p><p id="valor_Parcela">1.286,40</p></div>
+                        </div>
+                    </div>
+                    <div class="bg-[#002D43] p-6 rounded-xl space-y-4">
+                        <h4 class="text-[#BDA887] font-bold text-lg">SEM BALÃO</h4>
+                        <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4">
+                            <div class="text-sm space-y-2"><p id="quant_Entrada2" class="truncate">ENTRADA (4X)</p><p id="quant_Parcela2" class="truncate">PARCELA (272X)</p></div>
+                            <div class="text-sm space-y-2"><p>R$</p><p>R$</p></div>
+                            <div class="text-right font-bold space-y-2"><p id="valor_Entrada2">7.500,00</p><p id="valor_Parcela2">3.664,30</p></div>
+                        </div>
+                    </div>
+                    <div class="bg-[#002D43] p-6 rounded-xl flex xl:hidden items-center justify-between">
+                        <h4 class="text-[#BDA887] font-bold text-lg flex flex-col leading-tight"><span>VALOR</span><span>PARCELÁVEL</span></h4>
+                        <div class="flex items-center gap-2"><p class="text-lg">R$</p><p id="valor-Total-B" class="text-2xl font-bold">500.000,00</p></div>
+                    </div>
                 </div>
 
                 <div class="flex-1 flex flex-col gap-6">
-                    <div class="bg-[#002D43] p-6 rounded-xl grid grid-cols-1 xl:grid-cols-2 gap-x-8 gap-y-6"><div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">TOTAL</h4><div class="flex items-center justify-between"><label for="fullprice" class="text-sm whitespace-nowrap">VALOR</label><input id="fullprice" type="number" value="500000" required class="bg-[#BDA887] text-white rounded p-2 w-1/2 text-right border-none"></div><div class="flex items-center justify-between"><label for="discont" class="text-sm whitespace-nowrap">DESCONTO (%)</label><input id="discont" type="number" value="0" required class="bg-[#BDA887] text-white rounded p-2 w-1/2 text-right border-none"></div></div><div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">ENTRADA</h4><div class="flex items-center justify-between"><label for="quantEntrada" class="text-sm whitespace-nowrap">QUANT. PARCELAS</label><input id="quantEntrada" type="number" value="4" required class="bg-[#BDA887] text-white rounded p-2 w-1/2 text-right border-none"></div><div class="flex items-center justify-between"><label for="porcEntrada" class="text-sm whitespace-nowrap">% DO VALOR</label><input id="porcEntrada" type="number" value="6" required class="bg-[#BDA887] text-white rounded p-2 w-1/2 text-right border-none"></div></div><div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">BALÃO ANUAL</h4><div class="flex items-center justify-between"><label for="quantBalao" class="text-sm whitespace-nowrap">QUANT. BALÕES</label><input id="quantBalao" type="number" value="23" required class="bg-[#BDA887] text-white rounded p-2 w-1/2 text-right border-none"></div><div class="flex items-center justify-between"><label for="porcBalao" class="text-sm whitespace-nowrap">% DO VALOR</label><input id="porcBalao" type="number" value="61" required class="bg-[#BDA887] text-white rounded p-2 w-1/2 text-right border-none"></div></div><div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">PARCELA MENSAL</h4><div class="flex items-center justify-between"><label for="quantParcela" class="text-sm whitespace-nowrap">QUANT. PARCELAS</label><input id="quantParcela" type="number" value="276" required class="bg-[#BDA887] text-white rounded p-2 w-1/2 text-right border-none"></div><div class="flex items-center justify-between"><label class="text-sm whitespace-nowrap">% DO VALOR</label><label id="porcParcela" class="font-bold text-lg">33</label></div></div></div>
-                    <div class="hidden xl:flex bg-[#002D43] p-6 rounded-xl items-center justify-between"><h4 class="text-[#BDA887] font-bold text-lg flex flex-col leading-tight"><span>VALOR</span><span>PARCELÁVEL</span></h4><div class="flex items-center gap-2"><p class="text-lg">R$</p><p id="valor-Total" class="text-2xl font-bold">500.000,00</p></div></div>
+                    <div class="bg-[#002D43] p-6 rounded-xl grid grid-cols-1 xl:grid-cols-2 gap-x-8 gap-y-6">
+                        <!-- ✅ MUDANÇA NO ESTILO DOS INPUTS APLICADA ABAIXO -->
+                        <div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">TOTAL</h4><div class="flex items-center justify-between"><label for="fullprice" class="text-sm whitespace-nowrap">VALOR</label><input id="fullprice" type="number" value="500000" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div><div class="flex items-center justify-between"><label for="discont" class="text-sm whitespace-nowrap">DESCONTO (%)</label><input id="discont" type="number" value="0" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div></div>
+                        <div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">ENTRADA</h4><div class="flex items-center justify-between"><label for="quantEntrada" class="text-sm whitespace-nowrap">QUANT. PARCELAS</label><input id="quantEntrada" type="number" value="4" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div><div class="flex items-center justify-between"><label for="porcEntrada" class="text-sm whitespace-nowrap">% DO VALOR</label><input id="porcEntrada" type="number" value="6" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div></div>
+                        <div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">BALÃO ANUAL</h4><div class="flex items-center justify-between"><label for="quantBalao" class="text-sm whitespace-nowrap">QUANT. BALÕES</label><input id="quantBalao" type="number" value="23" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div><div class="flex items-center justify-between"><label for="porcBalao" class="text-sm whitespace-nowrap">% DO VALOR</label><input id="porcBalao" type="number" value="61" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div></div>
+                        <div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">PARCELA MENSAL</h4><div class="flex items-center justify-between"><label for="quantParcela" class="text-sm whitespace-nowrap">QUANT. PARCELAS</label><input id="quantParcela" type="number" value="276" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div><div class="flex items-center justify-between"><label class="text-sm whitespace-nowrap">% DO VALOR</label><label id="porcParcela" class="font-bold text-lg">33</label></div></div>
+                    </div>
+                    <div class="hidden xl:flex bg-[#002D43] p-6 rounded-xl items-center justify-between">
+                        <h4 class="text-[#BDA887] font-bold text-lg flex flex-col leading-tight"><span>VALOR</span><span>PARCELÁVEL</span></h4>
+                        <div class="flex items-center gap-2"><p class="text-lg">R$</p><p id="valor-Total" class="text-2xl font-bold">500.000,00</p></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- ✅ MUDANÇA AQUI: NOVO CONTAINER PARA LOGO E BOTÕES -->
-            <div class="w-full flex items-center flex-wrap gap-4 mt-8">
-                <!-- A Logo da Urbanizamos vem primeiro -->
-                <div class="w-32">
+            <div class="w-full flex flex-wrap justify-center lg:justify-end items-center gap-6 mt-8">
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button type="submit" class="flex items-center justify-center bg-[#E0CA96] text-[#283D52] font-bold py-4 px-12 rounded-full text-lg uppercase tracking-wider hover:bg-opacity-90 transition-colors">Calcular</button>
+                    <a href="antecipacao.html" class="flex items-center justify-center bg-transparent border border-[#E0CA96] text-[#E0CA96] font-bold py-3 px-10 rounded-full text-md uppercase tracking-wider hover:bg-[#E0CA96] hover:text-[#003B55] transition-colors">Simulador de Antecipação</a>
+                    <button id="openModalBtn" type="button" class="flex items-center justify-center bg-transparent border border-[#E0CA96] text-[#E0CA96] font-bold py-3 px-10 rounded-full text-md uppercase tracking-wider hover:bg-[#E0CA96] hover:text-[#003B55] transition-colors">Instruções</button>
+                </div>
+                <div class="w-40">
                     <img src="img/logo.png" title="Logo Urbanizamos" alt="Logo Urbanizamos" class="w-full h-auto">
                 </div>
-                
-                <!-- Botões de ação seguem na mesma linha -->
-                <button type="submit" class="bg-[#E0CA96] text-[#283D52] font-bold py-4 px-12 rounded-full text-lg uppercase tracking-wider hover:bg-opacity-90 transition-colors">Calcular</button>
-                <a href="antecipacao.html" class="bg-transparent border border-[#E0CA96] text-[#E0CA96] font-bold py-3 px-10 rounded-full text-md uppercase tracking-wider hover:bg-[#E0CA96] hover:text-[#003B55] transition-colors">Simulador de Antecipação</a>
-                <button id="openModalBtn" type="button" class="bg-transparent border border-[#E0CA96] text-[#E0CA96] font-bold py-3 px-10 rounded-full text-md uppercase tracking-wider hover:bg-[#E0CA96] hover:text-[#003B55] transition-colors">Instruções</button>
             </div>
-
         </form>
     </div>
 
+    <!-- ✅ MUDANÇA: CONTEÚDO DO MODAL DE INSTRUÇÕES RESTAURADO -->
     <div id="infoModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center p-4">
-        <div class="bg-[#002D43] text-white rounded-xl shadow-lg max-w-lg w-full p-8 relative space-y-6"><button id="closeModalBtn" type="button" class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button><h3 class="text-2xl font-bold text-[#BDA887]">Instruções de Uso</h3><div class="text-base space-y-4"><p>Este simulador ajuda a calcular as parcelas de um financiamento com base nos valores e percentuais informados.</p><ul class="list-disc list-inside space-y-2"><li><strong>TOTAL:</strong> Insira o valor total do bem e o percentual de desconto, se houver.</li><li><strong>ENTRADA:</strong> Defina o número de parcelas da entrada e o percentual do valor total que ela representa.</li><li><strong>BALÃO ANUAL:</strong> Informe quantos balões (parcelas anuais maiores) existirão e o percentual que representam.</li><li><strong>PARCELA MENSAL:</strong> O número de parcelas mensais é calculado automaticamente. O percentual restante será dividido entre elas.</li></ul><p>Após preencher os campos, clique em <strong>CALCULAR</strong> para ver os resultados nas seções "COM BALÃO" e "SEM BALÃO".</p></div></div>
+        <div class="bg-[#002D43] text-white rounded-xl shadow-lg max-w-lg w-full p-8 relative space-y-6">
+            <button id="closeModalBtn" type="button" class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <h3 class="text-2xl font-bold text-[#BDA887]">Instruções de Uso</h3>
+            <div class="text-base space-y-4">
+                <p>Este simulador ajuda a calcular as parcelas de um financiamento com base nos valores e percentuais informados.</p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>TOTAL:</strong> Insira o valor total do bem e o percentual de desconto, se houver.</li>
+                    <li><strong>ENTRADA:</strong> Defina o número de parcelas da entrada e o percentual do valor total que ela representa.</li>
+                    <li><strong>BALÃO ANUAL:</strong> Informe quantos balões (parcelas anuais maiores) existirão e o percentual que representam.</li>
+                    <li><strong>PARCELA MENSAL:</strong> O número de parcelas mensais é calculado automaticamente. O percentual restante será dividido entre elas.</li>
+                </ul>
+                <p>Após preencher os campos, clique em <strong>CALCULAR</strong> para ver os resultados nas seções "COM BALÃO" e "SEM BALÃO".</p>
+            </div>
+        </div>
     </div>
     
     <script src="scripts/parcelamento.js"></script>
