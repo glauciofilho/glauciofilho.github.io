@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Escolha o Simulador</title>
+
+    <!-- Bloco de Favicons Gerados -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#003b55">
+    <meta name="msapplication-TileColor" content="#003b55">
+    <meta name="theme-color" content="#003b55">
+
     <style>
         @font-face {
             font-family: 'Nexa_Bold';
@@ -16,17 +26,22 @@
     </style>
 </head>
 <body class="bg-[#003B55] text-white min-h-screen flex justify-center items-center p-4 sm:p-8">
-    <img src="img/flor.png" alt="" class="fixed bottom-0 left-0 w-48 h-auto hidden lg:block z-10">
+
+    <img src="img/flor.png" alt="" class="fixed bottom-0 left-0 w-48 h-auto hidden lg:block z-40">
     <img src="img/flor.png" alt="" class="fixed top-0 right-0 w-48 h-auto hidden lg:block rotate-180 z-10">
-    <a href="#" class="absolute top-0 left-1/2 -translate-x-1/2 z-10 w-32 h-auto lg:left-8 lg:translate-x-0">
+    <a href="simulador.html" class="absolute top-0 left-1/2 -translate-x-1/2 z-10 w-32 h-auto lg:left-8 lg:translate-x-0">
         <img src="img/granlago_logo.png" alt="Logo Gran Lago">
     </a>
+
     <div class="relative w-full max-w-6xl mx-auto pt-24 lg:pt-0 z-20 flex flex-col items-center space-y-12">
+        
         <div class="text-center">
             <h1 class="text-3xl lg:text-4xl font-bold text-[#E3C192]">Simuladores Financeiros</h1>
             <p class="text-lg text-gray-300 mt-2">Escolha uma das opções abaixo para começar.</p>
         </div>
+
         <div class="w-full flex flex-col lg:flex-row justify-center items-stretch gap-8">
+            
             <div class="bg-[#002D43] p-8 rounded-xl flex flex-col text-center items-center space-y-6 lg:w-1/3">
                 <h3 class="text-2xl font-bold text-[#BDA887]">Simulador de Parcelamento</h3>
                 <p class="text-gray-300 flex-grow">Calcule o valor das parcelas, entradas e balões de um financiamento com base em percentuais e prazos definidos.</p>
@@ -34,6 +49,7 @@
                     Acessar Simulador
                 </a>
             </div>
+
             <div class="bg-[#002D43] p-8 rounded-xl flex flex-col text-center items-center space-y-6 lg:w-1/3">
                 <h3 class="text-2xl font-bold text-[#BDA887]">Simulador de Antecipação</h3>
                 <p class="text-gray-300 flex-grow">Descubra o valor a ser pago ao antecipar parcelas, calculando os descontos com base em uma taxa de juros definida.</p>
@@ -41,10 +57,14 @@
                     Acessar Simulador
                 </a>
             </div>
+
         </div>
+
         <div class="w-40 pt-8">
             <img src="img/logo.png" title="Logo Urbanizamos" alt="Logo Urbanizamos" class="w-full h-auto">
         </div>
+
     </div>
+
 </body>
 </html>
