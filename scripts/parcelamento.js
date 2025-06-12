@@ -4,6 +4,7 @@ import { impedirNaoNumericos, limparNaoNumericos, permitirFormatoBR, parseNumero
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // ANEXANDO EVENTOS DE VALIDAÇÃO
     const valorInput = document.getElementById('fullprice');
     if (valorInput) {
         valorInput.addEventListener('input', permitirFormatoBR);
@@ -17,19 +18,39 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('input', limparNaoNumericos);
     });
 
+    // --- LÓGICA DO MODAL DE INSTRUÇÕES ---
     const openModalBtn = document.getElementById('openModalBtn');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const modal = document.getElementById('infoModal');
 
     if (openModalBtn && closeModalBtn && modal) {
-        const openModal = () => { modal.classList.remove('hidden'); modal.classList.add('flex'); document.body.style.overflow = 'hidden'; };
-        const closeModal = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); document.body.style.overflow = 'auto'; };
+        const openModal = () => {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeModal = () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        };
+
         openModalBtn.addEventListener('click', openModal);
         closeModalBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(); });
-        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !modal.classList.contains('hidden')) closeModal(); });
+
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
     }
 
+    // --- LÓGICA DO SIMULADOR ---
     const form = document.getElementById('form');
 
     function parcela(preco, taxa, quant) {
@@ -40,12 +61,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function calcularValores() {
         let valorTotal = parseNumeroBR(document.getElementById('fullprice').value);
-        let desconto = parseInt(document.getElementById('discont').value) || 0;
-        let quantEntrada = parseInt(document.getElementById('quantEntrada').value) || 1;
-        let porcentagemEntrada = parseInt(document.getElementById('porcEntrada').value) || 6;
-        let quantBalao = parseInt(document.getElementById('quantBalao').value) || 0;
-        let porcentagemBalao = parseInt(document.getElementById('porcBalao').value) || 0;
-        let quantParcela = parseInt(document.getElementById('quantParcela').value) || 0;
+        if (isNaN(valorTotal)) valorTotal = 0;
+
+        let desconto = parseInt(document.getElementById('discont').value);
+        if (isNaN(desconto)) desconto = 0;
+
+        let quantEntrada = parseInt(document.getElementById('quantEntrada').value);
+        if (isNaN(quantEntrada)) quantEntrada = 1;
+
+        let porcentagemEntrada = parseInt(document.getElementById('porcEntrada').value);
+        if (isNaN(porcentagemEntrada)) porcentagemEntrada = 6;
+        
+        let quantBalao = parseInt(document.getElementById('quantBalao').value);
+        if (isNaN(quantBalao)) quantBalao = 0;
+
+        let porcentagemBalao = parseInt(document.getElementById('porcBalao').value);
+        if (isNaN(porcentagemBalao)) porcentagemBalao = 0;
+
+        let quantParcela = parseInt(document.getElementById('quantParcela').value);
+        if (isNaN(quantParcela)) quantParcela = 0;
+
 
         if (valorTotal < 0 || valorTotal > 10000000) { alert("Essa calculadora permite somente valores positivos até R$ 10.000.000,00"); valorTotal = 500000; }
         if (desconto < 0 || desconto > 100) { alert("O desconto deve estar entre 0 e 100%."); desconto = 0; }

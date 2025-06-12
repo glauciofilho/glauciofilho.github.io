@@ -4,21 +4,39 @@ import { impedirNaoNumericos, limparNaoNumericos, permitirFormatoBR, parseNumero
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- LÓGICA DO MODAL DE INFORMAÇÕES ---
     const infoModal = document.getElementById('infoModalAntecipacao');
     const openInfoBtn = document.getElementById('openInfoBtn');
     const closeInfoBtn = document.getElementById('closeInfoBtn');
 
     if (infoModal && openInfoBtn && closeInfoBtn) {
-        const openModal = () => { infoModal.classList.remove('hidden'); infoModal.classList.add('flex'); document.body.style.overflow = 'hidden'; };
-        const closeModal = () => { infoModal.classList.add('hidden'); infoModal.classList.remove('flex'); document.body.style.overflow = 'auto'; };
+        const openModal = () => {
+            infoModal.classList.remove('hidden');
+            infoModal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeModal = () => {
+            infoModal.classList.add('hidden');
+            infoModal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        };
+
         openInfoBtn.addEventListener('click', openModal);
         closeInfoBtn.addEventListener('click', closeModal);
-        infoModal.addEventListener('click', (event) => { if (event.target === infoModal) closeModal(); });
-        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !infoModal.classList.contains('hidden')) closeModal(); });
+        infoModal.addEventListener('click', (event) => {
+            if (event.target === infoModal) closeModal();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !infoModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
         openModal();
     }
 
-    // ✅ MUDANÇA: Adicionado '#juros-balao' à lista de inputs decimais
+    // --- ANEXANDO EVENTOS DE VALIDAÇÃO ---
     const inputsDecimais = document.querySelectorAll('#valor-parcela, #juros-parcela, #valor-balao, #juros-balao');
     inputsDecimais.forEach(input => input.addEventListener('input', permitirFormatoBR));
 
@@ -28,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('input', limparNaoNumericos);
     });
 
+    // --- LÓGICA DO SIMULADOR ---
     const form = document.getElementById('form-antecipacao');
     if (form) {
         form.addEventListener('submit', (event) => {
@@ -59,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- Cálculo para Balões ---
         const valorBalao = parseNumeroBR(document.getElementById('valor-balao').value);
         const quantBalao = parseInt(document.getElementById('quant-balao').value) || 0;
-        // ✅ MUDANÇA: Lendo o valor do novo input de juros do balão
         const jurosContratualAnual = parseNumeroBR(document.getElementById('juros-balao').value) / 100;
         const jurosContratualMensal = Math.pow(1 + jurosContratualAnual, 1/12) - 1;
         const resultadosBalaoDiv = document.getElementById('resultados-balao');
@@ -79,5 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
+    // Executa um cálculo inicial com os valores padrão ao carregar a página
     calcularAntecipacao();
 });

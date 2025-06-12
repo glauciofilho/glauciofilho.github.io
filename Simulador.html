@@ -6,7 +6,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Escolha o Simulador</title>
 
-    <!-- Bloco de Favicons Gerados -->
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
@@ -22,6 +21,15 @@
         }
         body {
             font-family: 'Nexa_Bold', sans-serif;
+        }
+        
+        /* ✅ MUDANÇA: Reduz o tamanho da fonte base em telas menores (celular) */
+        /* O breakpoint 'lg' do Tailwind é 1024px, então usamos um valor ligeiramente menor. */
+        @media (max-width: 1023px) {
+            html {
+                /* O padrão é 16px. 9px é aprox. 5/9 de 16px. */
+                font-size: 9px;
+            }
         }
     </style>
 </head>

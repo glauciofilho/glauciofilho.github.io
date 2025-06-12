@@ -1,102 +1,131 @@
-// scripts/antecipacao.js
-
-import { impedirNaoNumericos, limparNaoNumericos, permitirFormatoBR, parseNumeroBR, formatarNumeroBR } from './validadores.js';
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    // --- LÓGICA DO MODAL DE INFORMAÇÕES ---
-    const infoModal = document.getElementById('infoModalAntecipacao');
-    const openInfoBtn = document.getElementById('openInfoBtn');
-    const closeInfoBtn = document.getElementById('closeInfoBtn');
-
-    if (infoModal && openInfoBtn && closeInfoBtn) {
-        const openModal = () => {
-            infoModal.classList.remove('hidden');
-            infoModal.classList.add('flex');
-            document.body.style.overflow = 'hidden';
-        };
-
-        const closeModal = () => {
-            infoModal.classList.add('hidden');
-            infoModal.classList.remove('flex');
-            document.body.style.overflow = 'auto';
-        };
-
-        openInfoBtn.addEventListener('click', openModal);
-        closeInfoBtn.addEventListener('click', closeModal);
-        infoModal.addEventListener('click', (event) => {
-            if (event.target === infoModal) closeModal();
-        });
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && !infoModal.classList.contains('hidden')) {
-                closeModal();
-            }
-        });
-
-        openModal();
-    }
-
-    // --- ANEXANDO EVENTOS DE VALIDAÇÃO ---
-    const inputsDecimais = document.querySelectorAll('#valor-parcela, #juros-parcela, #valor-balao, #juros-balao');
-    inputsDecimais.forEach(input => input.addEventListener('input', permitirFormatoBR));
-
-    const inputsInteiros = document.querySelectorAll('#quant-parcela, #quant-balao');
-    inputsInteiros.forEach(input => {
-        input.addEventListener('keydown', impedirNaoNumericos);
-        input.addEventListener('input', limparNaoNumericos);
-    });
-
-    // --- LÓGICA DO SIMULADOR ---
-    const form = document.getElementById('form-antecipacao');
-    if (form) {
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            calcularAntecipacao();
-        });
-    }
-
-    function calcularAntecipacao() {
-        // --- Cálculo para Parcelas ---
-        const valorParcela = parseNumeroBR(document.getElementById('valor-parcela').value);
-        const quantParcela = parseInt(document.getElementById('quant-parcela').value) || 0;
-        const jurosParcelaAM = parseNumeroBR(document.getElementById('juros-parcela').value) / 100;
-        const resultadosParcelasDiv = document.getElementById('resultados-parcelas');
-        resultadosParcelasDiv.innerHTML = '';
-
-        for (let i = 1; i <= quantParcela; i++) {
-            const valorAdiantado = valorParcela / Math.pow(1 + jurosParcelaAM, i);
-            const linha = document.createElement('div');
-            linha.className = 'grid grid-cols-3 gap-4 text-center text-white';
-            linha.innerHTML = `
-                <p>${i}</p>
-                <p>R$ ${formatarNumeroBR(valorParcela)}</p>
-                <p>R$ ${formatarNumeroBR(valorAdiantado)}</p>
-            `;
-            resultadosParcelasDiv.appendChild(linha);
-        }
-
-        // --- Cálculo para Balões ---
-        const valorBalao = parseNumeroBR(document.getElementById('valor-balao').value);
-        const quantBalao = parseInt(document.getElementById('quant-balao').value) || 0;
-        const jurosContratualAnual = parseNumeroBR(document.getElementById('juros-balao').value) / 100;
-        const jurosContratualMensal = Math.pow(1 + jurosContratualAnual, 1/12) - 1;
-        const resultadosBalaoDiv = document.getElementById('resultados-balao');
-        resultadosBalaoDiv.innerHTML = '';
-
-        for (let i = 1; i <= quantBalao; i++) {
-            const mesesParaDesconto = i * 12;
-            const valorAdiantado = valorBalao / Math.pow(1 + jurosContratualMensal, mesesParaDesconto);
-            const linha = document.createElement('div');
-            linha.className = 'grid grid-cols-3 gap-4 text-center text-white';
-            linha.innerHTML = `
-                <p>${i}</p>
-                <p>R$ ${formatarNumeroBR(valorBalao)}</p>
-                <p>R$ ${formatarNumeroBR(valorAdiantado)}</p>
-            `;
-            resultadosBalaoDiv.appendChild(linha);
-        }
-    }
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Simulador de Antecipação Price</title>
     
-    // Executa um cálculo inicial com os valores padrão ao carregar a página
-    calcularAntecipacao();
-});
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#003b55">
+    <meta name="msapplication-TileColor" content="#003b55">
+    <meta name="theme-color" content="#003b55">
+
+    <style>
+        @font-face {
+            font-family: 'Nexa_Bold';
+            src: url('font/Nexa_Bold.otf') format('opentype');
+        }
+        body {
+            font-family: 'Nexa_Bold', sans-serif;
+        }
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        /* ✅ MUDANÇA: Reduz o tamanho da fonte base em telas menores (celular) */
+        @media (max-width: 1023px) {
+            html {
+                font-size: 9px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#003B55] text-white">
+
+    <img src="img/flor.png" alt="" class="fixed bottom-0 left-0 w-48 h-auto hidden lg:block z-40">
+    <img src="img/flor.png" alt="" class="fixed top-0 right-0 w-48 h-auto hidden lg:block rotate-180 z-10">
+
+    <main class="relative z-20 pb-16 lg:pb-36">
+        <div class="w-full max-w-6xl mx-auto pt-24 lg:pt-8 px-4 sm:px-8">
+        
+            <a href="simulador.html" class="absolute top-0 left-1/2 -translate-x-1/2 z-10 w-40 h-auto lg:left-8 lg:translate-x-0">
+                <img src="img/granlago_logo.png" alt="Logo Gran Lago">
+            </a>
+
+            <form id="form-antecipacao" action="#" novalidate class="flex flex-col items-center space-y-8">
+                
+                <div class="bg-[#E3C192] text-[#003B55] rounded-xl py-4 px-8 w-full max-w-2xl text-center">
+                    <h2 class="text-2xl font-bold uppercase">Simulador de Antecipação Price</h2>
+                </div>
+                
+                <div class="w-full flex flex-col lg:flex-row justify-center items-stretch gap-8">
+                    
+                    <div class="bg-[#002D43] p-8 rounded-xl flex-1 flex flex-col space-y-6">
+                        <div class="bg-[#E0CA96] text-[#283D52] rounded-lg py-2 px-6 font-bold uppercase self-center">Parcelas</div>
+                        
+                        <div class="grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-4">
+                            <label for="valor-parcela">Valor da parcela</label> <input id="valor-parcela" type="text" value="1.000,00" inputmode="text" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 text-right">
+                            <label for="quant-parcela">Quant.</label> <input id="quant-parcela" type="number" value="240" inputmode="numeric" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 text-right">
+                            <label for="juros-parcela">Juros (a.m.)</label> <input id="juros-parcela" type="text" value="0,6434" inputmode="text" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 text-right">
+                        </div>
+
+                        <div class="border-t border-gray-600 pt-4 mt-auto">
+                            <div class="grid grid-cols-3 gap-4 text-center font-bold text-[#BDA887]">
+                                <p>Nº PARC.</p> <p>VALOR REAL</p> <p>VALOR ADIANT.</p>
+                            </div>
+                            <div id="resultados-parcelas" class="mt-2 space-y-1 text-center"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#002D43] p-8 rounded-xl flex-1 flex flex-col space-y-6">
+                        <div class="bg-[#E0CA96] text-[#283D52] rounded-lg py-2 px-6 font-bold uppercase self-center">Balão</div>
+                        
+                        <div class="grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-4">
+                            <label for="valor-balao">Valor do balão</label> <input id="valor-balao" type="text" value="25.000,00" inputmode="text" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 text-right">
+                            <label for="quant-balao">Quant.</label> <input id="quant-balao" type="number" value="20" inputmode="numeric" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 text-right">
+                            <label for="juros-balao">Juros (a.a.)</label> <input id="juros-balao" type="text" value="8" inputmode="text" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 text-right">
+                        </div>
+
+                         <div class="border-t border-gray-600 pt-4 mt-auto">
+                            <div class="grid grid-cols-3 gap-4 text-center font-bold text-[#BDA887]">
+                                <p>Nº PARC.</p> <p>VALOR REAL</p> <p>VALOR ADIANT.</p>
+                            </div>
+                            <div id="resultados-balao" class="mt-2 space-y-1 text-center"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </main>
+    
+    <footer class="bg-[#003B55] py-6 px-4 sm:px-8 border-t border-gray-700 shadow-lg z-30 lg:fixed lg:bottom-0 lg:left-0 lg:w-full">
+        <div class="w-full max-w-6xl mx-auto flex flex-wrap justify-center lg:justify-end items-center gap-6">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button type="submit" form="form-antecipacao" class="flex items-center justify-center bg-[#E0CA96] text-[#283D52] font-bold py-4 px-12 rounded-full text-lg uppercase tracking-wider hover:bg-opacity-90 transition-colors">Calcular</button>
+                <a href="parcelamento.html" class="flex items-center justify-center bg-transparent border border-[#E0CA96] text-[#E0CA96] font-bold py-3 px-10 rounded-full text-md uppercase tracking-wider hover:bg-[#E0CA96] hover:text-[#003B55] transition-colors">Simulador de Parcelamento</a>
+                <button id="openInfoBtn" type="button" class="flex items-center justify-center bg-transparent border border-[#E0CA96] text-[#E0CA96] font-bold py-3 px-10 rounded-full text-md uppercase tracking-wider hover:bg-[#E0CA96] hover:text-[#003B55] transition-colors">Informações</button>
+            </div>
+            <div class="w-40">
+                <img src="img/logo.png" title="Logo Urbanizamos" alt="Logo Urbanizamos" class="w-full h-auto">
+            </div>
+        </div>
+    </footer>
+
+    <div id="infoModalAntecipacao" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center p-4">
+        <div class="bg-[#002D43] text-white rounded-xl shadow-lg max-w-lg w-full p-8 relative space-y-6">
+            <button id="closeInfoBtn" type="button" class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <h3 class="text-2xl font-bold text-[#BDA887]">Informações Importantes</h3>
+            <div class="text-base text-gray-300 space-y-2">
+                <p>Cálculo financeiro para simulação de antecipação de parcelas firmadas em contrato.</p>
+                <p>Valores podem mudar a depender do saldo do contrato, dias de antecipação e indexador contratual.</p>
+                <p>Para valores reais por favor contactar secretaria de Vendas do empreendimento.</p>
+                <p>Não se aplica a contratos firmados com amortização pela Tabela Gradiente.</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="scripts/antecipacao.js"></script>
+</body>
+</html>
