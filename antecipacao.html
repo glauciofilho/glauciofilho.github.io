@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Simulador de Antecipação</title>
+    <title>Simulador de Antecipação Price</title>
     <style>
         @font-face {
             font-family: 'Nexa_Bold';
@@ -13,25 +13,89 @@
         body {
             font-family: 'Nexa_Bold', sans-serif;
         }
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
     </style>
 </head>
-<body class="bg-[#003B55] text-white min-h-screen flex items-center justify-center p-4 sm:p-8">
-    <div class="w-full max-w-4xl mx-auto flex flex-col items-center space-y-8">
-        <div class="relative bg-[#E3C192] text-[#003B55] rounded-xl py-4 px-8 w-full max-w-md text-center">
-            <h2 class="text-2xl font-bold">SIMULADOR DE ANTECIPAÇÃO</h2>
-            <a href="index.html" title="Voltar" class="absolute top-1/2 -translate-y-1/2 left-5 text-[#003B55] hover:text-opacity-70 transition-opacity">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+<body class="bg-[#003B55] text-white">
+    <img src="img/flor.png" alt="" class="fixed bottom-0 left-0 w-48 h-auto hidden lg:block z-40">
+    <img src="img/flor.png" alt="" class="fixed top-0 right-0 w-48 h-auto hidden lg:block rotate-180 z-10">
+    <main class="relative z-20 pb-40 lg:pb-36">
+        <div class="w-full max-w-6xl mx-auto pt-24 lg:pt-8 px-4 sm:px-8">
+            <a href="simulador.html" class="absolute top-0 left-1/2 -translate-x-1/2 z-10 w-40 h-auto lg:left-8 lg:translate-x-0">
+                <img src="img/granlago_logo.png" alt="Logo Gran Lago">
             </a>
+            <form id="form-antecipacao" action="#" novalidate class="flex flex-col items-center space-y-8">
+                <div class="bg-[#E3C192] text-[#003B55] rounded-xl py-4 px-8 w-full max-w-2xl text-center">
+                    <h2 class="text-2xl font-bold uppercase">Simulador de Antecipação Price</h2>
+                </div>
+                <div class="w-full flex flex-col lg:flex-row justify-center items-stretch gap-8">
+                    <div class="bg-[#002D43] p-8 rounded-xl flex-1 flex flex-col space-y-6">
+                        <div class="bg-[#E0CA96] text-[#283D52] rounded-lg py-2 px-6 font-bold uppercase self-center">Parcelas</div>
+                        <div class="grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-4">
+                            <label for="valor-parcela">Valor da parcela</label> <input id="valor-parcela" type="text" value="1.000,00" inputmode="text" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 text-right">
+                            <label for="quant-parcela">Quant.</label> <input id="quant-parcela" type="number" value="240" inputmode="numeric" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 text-right">
+                            <label for="juros-parcela">Juros (a.m.)</label> <input id="juros-parcela" type="text" value="0,6434" inputmode="text" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 text-right">
+                        </div>
+                        <div class="border-t border-gray-600 pt-4 mt-auto">
+                            <div class="grid grid-cols-3 gap-4 text-center font-bold text-[#BDA887]">
+                                <p>Nº PARC.</p> <p>VALOR REAL</p> <p>VALOR ADIANT.</p>
+                            </div>
+                            <div id="resultados-parcelas" class="mt-2 space-y-1 text-center"></div>
+                        </div>
+                    </div>
+                    <div class="bg-[#002D43] p-8 rounded-xl flex-1 flex flex-col space-y-6">
+                        <div class="bg-[#E0CA96] text-[#283D52] rounded-lg py-2 px-6 font-bold uppercase self-center">Balão</div>
+                        <div class="grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-4">
+                            <label for="valor-balao">Valor do balão</label> <input id="valor-balao" type="text" value="25.000,00" inputmode="text" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 text-right">
+                            <label for="quant-balao">Quant.</label> <input id="quant-balao" type="number" value="20" inputmode="numeric" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 text-right">
+                            <!-- ✅ MUDANÇA #2: Juros do balão agora é um input -->
+                            <label for="juros-balao">Juros (a.a.)</label> <input id="juros-balao" type="text" value="8" inputmode="text" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 text-right">
+                        </div>
+
+                         <div class="border-t border-gray-600 pt-4 mt-auto">
+                            <div class="grid grid-cols-3 gap-4 text-center font-bold text-[#BDA887]">
+                                <p>Nº PARC.</p> <p>VALOR REAL</p> <p>VALOR ADIANT.</p>
+                            </div>
+                            <div id="resultados-balao" class="mt-2 space-y-1 text-center"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="bg-[#002D43] p-8 rounded-xl w-full text-center">
-            <h3 class="text-xl text-gray-400">
-                O conteúdo e a lógica para o Simulador de Antecipação virão aqui.
-            </h3>
+    </main>
+    <footer class="fixed bottom-0 left-0 w-full bg-[#003B55] py-6 px-4 sm:px-8 border-t border-gray-700 shadow-lg z-30">
+        <div class="w-full max-w-6xl mx-auto flex flex-wrap justify-center lg:justify-end items-center gap-6">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button type="submit" form="form-antecipacao" class="flex items-center justify-center bg-[#E0CA96] text-[#283D52] font-bold py-4 px-12 rounded-full text-lg uppercase tracking-wider hover:bg-opacity-90 transition-colors">Calcular</button>
+                <a href="parcelamento.html" class="flex items-center justify-center bg-transparent border border-[#E0CA96] text-[#E0CA96] font-bold py-3 px-10 rounded-full text-md uppercase tracking-wider hover:bg-[#E0CA96] hover:text-[#003B55] transition-colors">Simulador de Parcelamento</a>
+                <button id="openInfoBtn" type="button" class="flex items-center justify-center bg-transparent border border-[#E0CA96] text-[#E0CA96] font-bold py-3 px-10 rounded-full text-md uppercase tracking-wider hover:bg-[#E0CA96] hover:text-[#003B55] transition-colors">Informações</button>
+            </div>
+            <div class="w-40">
+                <img src="img/logo.png" title="Logo Urbanizamos" alt="Logo Urbanizamos" class="w-full h-auto">
+            </div>
         </div>
-        <div class="w-48 mt-4">
-            <img src="img/logo.png" title="Logo Urbanizamos" alt="Logo Urbanizamos" class="w-full h-auto">
+    </footer>
+    <div id="infoModalAntecipacao" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center p-4">
+        <div class="bg-[#002D43] text-white rounded-xl shadow-lg max-w-lg w-full p-8 relative space-y-6">
+            <button id="closeInfoBtn" type="button" class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <h3 class="text-2xl font-bold text-[#BDA887]">Informações Importantes</h3>
+            <div class="text-base text-gray-300 space-y-2">
+                <p>Cálculo financeiro para simulação de antecipação de parcelas firmadas em contrato.</p>
+                <p>Valores podem mudar a depender do saldo do contrato, dias de antecipação e indexador contratual.</p>
+                <p>Para valores reais por favor contactar secretaria de Vendas do empreendimento.</p>
+                <p>Não se aplica a contratos firmados com amortização pela Tabela Gradiente.</p>
+            </div>
         </div>
     </div>
-    <script src="scripts/antecipacao.js"></script>
+    <script type="module" src="scripts/antecipacao.js"></script>
 </body>
 </html>

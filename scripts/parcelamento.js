@@ -1,46 +1,36 @@
+// scripts/parcelamento.js
+
+import { impedirNaoNumericos, limparNaoNumericos, permitirFormatoBR, parseNumeroBR, formatarNumeroBR } from './validadores.js';
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- LÓGICA DO MODAL DE INSTRUÇÕES ---
+    const valorInput = document.getElementById('fullprice');
+    if (valorInput) {
+        valorInput.addEventListener('input', permitirFormatoBR);
+    }
+    
+    const inputsInteiros = document.querySelectorAll(
+        '#discont, #quantEntrada, #porcEntrada, #quantBalao, #porcBalao, #quantParcela'
+    );
+    inputsInteiros.forEach(input => {
+        input.addEventListener('keydown', impedirNaoNumericos);
+        input.addEventListener('input', limparNaoNumericos);
+    });
+
     const openModalBtn = document.getElementById('openModalBtn');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const modal = document.getElementById('infoModal');
 
     if (openModalBtn && closeModalBtn && modal) {
-        const openModal = () => {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.body.style.overflow = 'hidden';
-        };
-
-        const closeModal = () => {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.body.style.overflow = 'auto';
-        };
-
+        const openModal = () => { modal.classList.remove('hidden'); modal.classList.add('flex'); document.body.style.overflow = 'hidden'; };
+        const closeModal = () => { modal.classList.add('hidden'); modal.classList.remove('flex'); document.body.style.overflow = 'auto'; };
         openModalBtn.addEventListener('click', openModal);
         closeModalBtn.addEventListener('click', closeModal);
-
-        modal.addEventListener('click', (event) => {
-            if (event.target === modal) closeModal();
-        });
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
-                closeModal();
-            }
-        });
+        modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(); });
+        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !modal.classList.contains('hidden')) closeModal(); });
     }
 
-    // --- LÓGICA DO SIMULADOR ---
     const form = document.getElementById('form');
-
-    function formatarNumero(valor) {
-        const numeroFormatado = parseFloat(valor).toFixed(2);
-        const partes = numeroFormatado.split('.');
-        partes[0] = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        return partes.join(',');
-    }
 
     function parcela(preco, taxa, quant) {
         if (quant === 0) return preco;
@@ -49,15 +39,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function calcularValores() {
-        let valorTotal = parseFloat(document.getElementById('fullprice').value) || 0;
-        let desconto = parseFloat(document.getElementById('discont').value) || 0;
+        let valorTotal = parseNumeroBR(document.getElementById('fullprice').value);
+        let desconto = parseInt(document.getElementById('discont').value) || 0;
         let quantEntrada = parseInt(document.getElementById('quantEntrada').value) || 1;
-        let porcentagemEntrada = parseFloat(document.getElementById('porcEntrada').value) || 6;
+        let porcentagemEntrada = parseInt(document.getElementById('porcEntrada').value) || 6;
         let quantBalao = parseInt(document.getElementById('quantBalao').value) || 0;
-        let porcentagemBalao = parseFloat(document.getElementById('porcBalao').value) || 0;
+        let porcentagemBalao = parseInt(document.getElementById('porcBalao').value) || 0;
         let quantParcela = parseInt(document.getElementById('quantParcela').value) || 0;
 
-        // Validações...
         if (valorTotal < 0 || valorTotal > 10000000) { alert("Essa calculadora permite somente valores positivos até R$ 10.000.000,00"); valorTotal = 500000; }
         if (desconto < 0 || desconto > 100) { alert("O desconto deve estar entre 0 e 100%."); desconto = 0; }
         if (quantEntrada < 1 || quantEntrada > 5) { alert("A quantidade de parcelas da entrada deve ser um número entre 1 e 5."); quantEntrada = Math.min(Math.max(quantEntrada, 1), 5); }
@@ -81,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const valorParcela = parcela(valorComDesconto * (porcentagemParcela / 100), taxaMensal, quantParcela);
         const valorParcela2 = parcela(valorComDesconto * ((porcentagemBalao + porcentagemParcela) / 100), taxaMensal, quantParcela);
 
-        document.getElementById('fullprice').value = valorTotal;
+        document.getElementById('fullprice').value = formatarNumeroBR(valorTotal);
         document.getElementById('discont').value = desconto;
         document.getElementById('quantEntrada').value = quantEntrada;
         document.getElementById('porcEntrada').value = porcentagemEntrada;
@@ -89,13 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('porcBalao').value = porcentagemBalao;
         document.getElementById('quantParcela').value = quantParcela;
 
-        document.getElementById('valor_Entrada').innerText = formatarNumero(valorEntrada);
-        document.getElementById('valor_Balao').innerText = formatarNumero(valorBalao);
-        document.getElementById('valor_Parcela').innerText = formatarNumero(valorParcela);
-        document.getElementById('valor-Total').innerText = formatarNumero(valorComDesconto);
-        document.getElementById('valor-Total-B').innerText = formatarNumero(valorComDesconto);
-        document.getElementById('valor_Entrada2').innerText = formatarNumero(valorEntrada);
-        document.getElementById('valor_Parcela2').innerText = formatarNumero(valorParcela2);
+        document.getElementById('valor_Entrada').innerText = formatarNumeroBR(valorEntrada);
+        document.getElementById('valor_Balao').innerText = formatarNumeroBR(valorBalao);
+        document.getElementById('valor_Parcela').innerText = formatarNumeroBR(valorParcela);
+        document.getElementById('valor-Total').innerText = formatarNumeroBR(valorComDesconto);
+        document.getElementById('valor-Total-B').innerText = formatarNumeroBR(valorComDesconto);
+        document.getElementById('valor_Entrada2').innerText = formatarNumeroBR(valorEntrada);
+        document.getElementById('valor_Parcela2').innerText = formatarNumeroBR(valorParcela2);
         document.getElementById('porcParcela').innerText = porcentagemParcela;
 
         document.getElementById('quant_Entrada').innerText = `ENTRADA (${quantEntrada}X)`;
@@ -103,8 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('quant_Parcela').innerText = `PARCELA (${quantParcela}X)`;
         document.getElementById('quant_Entrada2').innerText = `ENTRADA (${quantEntrada}X)`;
         document.getElementById('quant_Parcela2').innerText = `PARCELA (${quantParcela}X)`;
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     if (form) {

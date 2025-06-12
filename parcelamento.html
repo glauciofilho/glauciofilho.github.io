@@ -13,67 +13,79 @@
         body {
             font-family: 'Nexa_Bold', sans-serif;
         }
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
     </style>
 </head>
-<body class="bg-[#003B55] text-white min-h-screen flex justify-center lg:items-center p-4 sm:p-8">
-    <img src="img/flor.png" alt="" class="fixed bottom-0 left-0 w-48 h-auto hidden lg:block z-10">
+<body class="bg-[#003B55] text-white">
+    <img src="img/flor.png" alt="" class="fixed bottom-0 left-0 w-48 h-auto hidden lg:block z-40">
     <img src="img/flor.png" alt="" class="fixed top-0 right-0 w-48 h-auto hidden lg:block rotate-180 z-10">
-    <div class="relative w-full max-w-6xl mx-auto pt-24 lg:pt-0 z-20">
-        <a href="parcelamento.html" class="absolute top-0 left-1/2 -translate-x-1/2 z-10 w-32 h-auto lg:left-8 lg:translate-x-0">
-            <img src="img/granlago_logo.png" alt="Logo Gran Lago">
-        </a>
-        <form id="form" action="#" class="flex flex-col items-center space-y-8">
-            <div class="bg-[#E3C192] text-[#003B55] rounded-xl py-4 px-8 w-full max-w-md text-center">
-                <h2 class="text-2xl font-bold">SIMULADOR PARCELAS</h2>
-            </div>
-            <div class="w-full flex flex-col lg:flex-row-reverse gap-8">
-                <div class="flex flex-col gap-6 lg:w-1/3">
-                    <div class="bg-[#002D43] p-6 rounded-xl space-y-4">
-                        <h4 class="text-[#BDA887] font-bold text-lg">COM BALÃO</h4>
-                        <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4">
-                            <div class="text-sm space-y-2"><p id="quant_Entrada" class="truncate">ENTRADA (4X)</p><p id="quant_Balao" class="truncate">BALÃO (23X)</p><p id="quant_Parcela" class="truncate">PARCELA (272X)</p></div>
-                            <div class="text-sm space-y-2"><p>R$</p><p>R$</p><p>R$</p></div>
-                            <div class="text-right font-bold space-y-2"><p id="valor_Entrada">7.500,00</p><p id="valor_Balao">29.408,76</p><p id="valor_Parcela">1.286,40</p></div>
+    <main class="relative z-20 pb-40 lg:pb-36">
+        <div class="w-full max-w-6xl mx-auto pt-24 lg:pt-8 px-4 sm:px-8">
+            <a href="simulador.html" class="absolute top-0 left-1/2 -translate-x-1/2 z-10 w-32 h-auto lg:left-8 lg:translate-x-0">
+                <img src="img/granlago_logo.png" alt="Logo Gran Lago">
+            </a>
+            <form id="form" action="#" class="flex flex-col items-center space-y-8" novalidate>
+                <div class="bg-[#E3C192] text-[#003B55] rounded-xl py-4 px-8 w-full max-w-md text-center">
+                    <h2 class="text-2xl font-bold">SIMULADOR PARCELAS</h2>
+                </div>
+                <div class="w-full flex flex-col lg:flex-row-reverse gap-8">
+                    <div class="flex flex-col gap-6 lg:w-1/3">
+                        <div class="bg-[#002D43] p-6 rounded-xl space-y-4">
+                            <h4 class="text-[#BDA887] font-bold text-lg">COM BALÃO</h4>
+                            <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4">
+                                <div class="text-sm space-y-2"><p id="quant_Entrada" class="truncate">ENTRADA (4X)</p><p id="quant_Balao" class="truncate">BALÃO (23X)</p><p id="quant_Parcela" class="truncate">PARCELA (272X)</p></div>
+                                <div class="text-sm space-y-2"><p>R$</p><p>R$</p><p>R$</p></div>
+                                <div class="text-right font-bold space-y-2"><p id="valor_Entrada">7.500,00</p><p id="valor_Balao">29.408,76</p><p id="valor_Parcela">1.286,40</p></div>
+                            </div>
+                        </div>
+                        <div class="bg-[#002D43] p-6 rounded-xl space-y-4">
+                            <h4 class="text-[#BDA887] font-bold text-lg">SEM BALÃO</h4>
+                            <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4">
+                                <div class="text-sm space-y-2"><p id="quant_Entrada2" class="truncate">ENTRADA (4X)</p><p id="quant_Parcela2" class="truncate">PARCELA (272X)</p></div>
+                                <div class="text-sm space-y-2"><p>R$</p><p>R$</p></div>
+                                <div class="text-right font-bold space-y-2"><p id="valor_Entrada2">7.500,00</p><p id="valor_Parcela2">3.664,30</p></div>
+                            </div>
+                        </div>
+                        <div class="bg-[#002D43] p-6 rounded-xl flex xl:hidden items-center justify-between">
+                            <h4 class="text-[#BDA887] font-bold text-lg flex flex-col leading-tight"><span>VALOR</span><span>PARCELÁVEL</span></h4>
+                            <div class="flex items-center gap-2"><p class="text-lg">R$</p><p id="valor-Total-B" class="text-2xl font-bold">500.000,00</p></div>
                         </div>
                     </div>
-                    <div class="bg-[#002D43] p-6 rounded-xl space-y-4">
-                        <h4 class="text-[#BDA887] font-bold text-lg">SEM BALÃO</h4>
-                        <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-x-4">
-                            <div class="text-sm space-y-2"><p id="quant_Entrada2" class="truncate">ENTRADA (4X)</p><p id="quant_Parcela2" class="truncate">PARCELA (272X)</p></div>
-                            <div class="text-sm space-y-2"><p>R$</p><p>R$</p></div>
-                            <div class="text-right font-bold space-y-2"><p id="valor_Entrada2">7.500,00</p><p id="valor_Parcela2">3.664,30</p></div>
+                    <div class="flex-1 flex flex-col gap-6">
+                        <div class="bg-[#002D43] p-6 rounded-xl grid grid-cols-1 xl:grid-cols-2 gap-x-8 gap-y-6">
+                            <div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">TOTAL</h4><div class="flex items-center justify-between"><label for="fullprice" class="text-sm whitespace-nowrap">VALOR</label><input id="fullprice" type="text" value="500.000,00" required inputmode="text" class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div><div class="flex items-center justify-between"><label for="discont" class="text-sm whitespace-nowrap">DESCONTO (%)</label><input id="discont" type="number" value="0" required inputmode="numeric" class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div></div>
+                            <div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">ENTRADA</h4><div class="flex items-center justify-between"><label for="quantEntrada" class="text-sm whitespace-nowrap">QUANT. PARCELAS</label><input id="quantEntrada" type="number" value="4" required inputmode="numeric" class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div><div class="flex items-center justify-between"><label for="porcEntrada" class="text-sm whitespace-nowrap">% DO VALOR</label><input id="porcEntrada" type="number" value="6" required inputmode="numeric" class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div></div>
+                            <div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">BALÃO ANUAL</h4><div class="flex items-center justify-between"><label for="quantBalao" class="text-sm whitespace-nowrap">QUANT. BALÕES</label><input id="quantBalao" type="number" value="23" required inputmode="numeric" class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div><div class="flex items-center justify-between"><label for="porcBalao" class="text-sm whitespace-nowrap">% DO VALOR</label><input id="porcBalao" type="number" value="61" required inputmode="numeric" class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div></div>
+                            <div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">PARCELA MENSAL</h4><div class="flex items-center justify-between"><label for="quantParcela" class="text-sm whitespace-nowrap">QUANT. PARCELAS</label><input id="quantParcela" type="number" value="276" required inputmode="numeric" class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div><div class="flex items-center justify-between"><label class="text-sm whitespace-nowrap">% DO VALOR</label><label id="porcParcela" class="font-bold text-lg">33</label></div></div>
+                        </div>
+                        <div class="hidden xl:flex bg-[#002D43] p-6 rounded-xl items-center justify-between">
+                            <h4 class="text-[#BDA887] font-bold text-lg flex flex-col leading-tight"><span>VALOR</span><span>PARCELÁVEL</span></h4>
+                            <div class="flex items-center gap-2"><p class="text-lg">R$</p><p id="valor-Total" class="text-2xl font-bold">500.000,00</p></div>
                         </div>
                     </div>
-                    <div class="bg-[#002D43] p-6 rounded-xl flex xl:hidden items-center justify-between">
-                        <h4 class="text-[#BDA887] font-bold text-lg flex flex-col leading-tight"><span>VALOR</span><span>PARCELÁVEL</span></h4>
-                        <div class="flex items-center gap-2"><p class="text-lg">R$</p><p id="valor-Total-B" class="text-2xl font-bold">500.000,00</p></div>
-                    </div>
                 </div>
-                <div class="flex-1 flex flex-col gap-6">
-                    <div class="bg-[#002D43] p-6 rounded-xl grid grid-cols-1 xl:grid-cols-2 gap-x-8 gap-y-6">
-                        <div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">TOTAL</h4><div class="flex items-center justify-between"><label for="fullprice" class="text-sm whitespace-nowrap">VALOR</label><input id="fullprice" type="number" value="500000" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div><div class="flex items-center justify-between"><label for="discont" class="text-sm whitespace-nowrap">DESCONTO (%)</label><input id="discont" type="number" value="0" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div></div>
-                        <div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">ENTRADA</h4><div class="flex items-center justify-between"><label for="quantEntrada" class="text-sm whitespace-nowrap">QUANT. PARCELAS</label><input id="quantEntrada" type="number" value="4" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div><div class="flex items-center justify-between"><label for="porcEntrada" class="text-sm whitespace-nowrap">% DO VALOR</label><input id="porcEntrada" type="number" value="6" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div></div>
-                        <div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">BALÃO ANUAL</h4><div class="flex items-center justify-between"><label for="quantBalao" class="text-sm whitespace-nowrap">QUANT. BALÕES</label><input id="quantBalao" type="number" value="23" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div><div class="flex items-center justify-between"><label for="porcBalao" class="text-sm whitespace-nowrap">% DO VALOR</label><input id="porcBalao" type="number" value="61" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div></div>
-                        <div class="space-y-4"><h4 class="text-[#BDA887] font-bold text-lg">PARCELA MENSAL</h4><div class="flex items-center justify-between"><label for="quantParcela" class="text-sm whitespace-nowrap">QUANT. PARCELAS</label><input id="quantParcela" type="number" value="276" required class="bg-transparent border border-[#BDA887] text-white rounded p-2 w-1/2 text-right"></div><div class="flex items-center justify-between"><label class="text-sm whitespace-nowrap">% DO VALOR</label><label id="porcParcela" class="font-bold text-lg">33</label></div></div>
-                    </div>
-                    <div class="hidden xl:flex bg-[#002D43] p-6 rounded-xl items-center justify-between">
-                        <h4 class="text-[#BDA887] font-bold text-lg flex flex-col leading-tight"><span>VALOR</span><span>PARCELÁVEL</span></h4>
-                        <div class="flex items-center gap-2"><p class="text-lg">R$</p><p id="valor-Total" class="text-2xl font-bold">500.000,00</p></div>
-                    </div>
-                </div>
+            </form>
+        </div>
+    </main>
+    <footer class="fixed bottom-0 left-0 w-full bg-[#003B55] py-6 px-4 sm:px-8 border-t border-gray-700 shadow-lg z-30">
+        <div class="w-full max-w-6xl mx-auto flex flex-wrap justify-center lg:justify-end items-center gap-6">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button type="submit" form="form" class="flex items-center justify-center bg-[#E0CA96] text-[#283D52] font-bold py-4 px-12 rounded-full text-lg uppercase tracking-wider hover:bg-opacity-90 transition-colors">Calcular</button>
+                <a href="antecipacao.html" class="flex items-center justify-center bg-transparent border border-[#E0CA96] text-[#E0CA96] font-bold py-3 px-10 rounded-full text-md uppercase tracking-wider hover:bg-[#E0CA96] hover:text-[#003B55] transition-colors">Simulador de Antecipação</a>
+                <button id="openModalBtn" type="button" class="flex items-center justify-center bg-transparent border border-[#E0CA96] text-[#E0CA96] font-bold py-3 px-10 rounded-full text-md uppercase tracking-wider hover:bg-[#E0CA96] hover:text-[#003B55] transition-colors">Instruções</button>
             </div>
-            <div class="w-full flex flex-wrap justify-center lg:justify-end items-center gap-6 mt-8">
-                <div class="flex flex-wrap justify-center gap-4">
-                    <button type="submit" class="flex items-center justify-center bg-[#E0CA96] text-[#283D52] font-bold py-4 px-12 rounded-full text-lg uppercase tracking-wider hover:bg-opacity-90 transition-colors">Calcular</button>
-                    <a href="antecipacao.html" class="flex items-center justify-center bg-transparent border border-[#E0CA96] text-[#E0CA96] font-bold py-3 px-10 rounded-full text-md uppercase tracking-wider hover:bg-[#E0CA96] hover:text-[#003B55] transition-colors">Simulador de Antecipação</a>
-                    <button id="openModalBtn" type="button" class="flex items-center justify-center bg-transparent border border-[#E0CA96] text-[#E0CA96] font-bold py-3 px-10 rounded-full text-md uppercase tracking-wider hover:bg-[#E0CA96] hover:text-[#003B55] transition-colors">Instruções</button>
-                </div>
-                <div class="w-40">
-                    <img src="img/logo.png" title="Logo Urbanizamos" alt="Logo Urbanizamos" class="w-full h-auto">
-                </div>
+            <div class="w-40">
+                <img src="img/logo.png" title="Logo Urbanizamos" alt="Logo Urbanizamos" class="w-full h-auto">
             </div>
-        </form>
-    </div>
+        </div>
+    </footer>
     <div id="infoModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center p-4">
         <div class="bg-[#002D43] text-white rounded-xl shadow-lg max-w-lg w-full p-8 relative space-y-6">
             <button id="closeModalBtn" type="button" class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors">
@@ -92,6 +104,6 @@
             </div>
         </div>
     </div>
-    <script src="scripts/parcelamento.js"></script>
+    <script type="module" src="scripts/parcelamento.js"></script>
 </body>
 </html>
