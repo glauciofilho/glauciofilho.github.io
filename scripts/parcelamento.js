@@ -124,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('porcParcela').innerText = porcentagemParcela;
 
         document.getElementById('quant_Entrada').innerText = `ENTRADA (${quantEntrada}X)`;
+        document.getElementById('quant_Entrada2').innerText = `ENTRADA (${quantEntrada}X)`;
     }
 
     if (form) {
