@@ -70,7 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let quantParcela = parseInt(document.getElementById('quantParcela').value) || 0;
 
         // Validações (Mantidas do seu código)
-        if (valorTotal < 0 || valorTotal > 10000000) { alert("Valor inválido"); valorTotal = 500000; }
+        if (valorTotal < 0 || valorTotal > 100000000) { alert("Valor inválido"); valorTotal = 500000; }
+        if (quantEntrada > 5) quantEntrada = 5;
+        if (quantEntrada < 0) quantEntrada = 1;
         if (porcentagemEntrada < 8) porcentagemEntrada = 8;
         if (porcentagemEntrada + porcentagemBalao > 100) { alert("Soma das % excede 100"); porcentagemBalao = 0; }
 
