@@ -71,10 +71,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Validações (Mantidas do seu código)
         if (valorTotal < 0 || valorTotal > 100000000) { alert("Valor inválido"); valorTotal = 500000; }
+        document.getElementById('fullprice').innerText = formatarNumeroBR(valorTotal);
         if (quantEntrada > 5) quantEntrada = 5;
         if (quantEntrada < 0) quantEntrada = 1;
+        document.getElementById('quantEntrada').innerText = quantEntrada;
         if (porcentagemEntrada < 8) porcentagemEntrada = 8;
+        document.getElementById('porcEntrada').innerText = porcentagemEntrada;
         if (porcentagemEntrada + porcentagemBalao > 100) { alert("Soma das % excede 100"); porcentagemBalao = 0; }
+        document.getElementById('porcBalao').innerText = porcentagemBalao;
 
         let valorComDesconto = valorTotal * (1 - desconto / 100);
         const porcentagemParcela = 100 - porcentagemBalao - porcentagemEntrada;
