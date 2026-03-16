@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Validações (Mantidas do seu código)
         if (valorTotal < 0 || valorTotal > 10000000) { alert("Valor inválido"); valorTotal = 500000; }
-        if (porcentagemEntrada < 6) porcentagemEntrada = 6;
+        if (porcentagemEntrada < 8) porcentagemEntrada = 8;
         if (porcentagemEntrada + porcentagemBalao > 100) { alert("Soma das % excede 100"); porcentagemBalao = 0; }
 
         let valorComDesconto = valorTotal * (1 - desconto / 100);
